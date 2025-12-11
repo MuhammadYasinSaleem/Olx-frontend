@@ -27,7 +27,7 @@
       "@components/*": ["src/components/*"],
       "@assets/*": ["src/assets/*"],
       "@utils/*": ["src/utils/*"],
-      "@types/*": ["src/types/*"],
+      "@customtypes/*": ["src/types/*"],
       "@store/*": ["src/store/*"],
       "@hooks/*": ["src/hooks/*"],
       "@services/*": ["src/services/*"],
