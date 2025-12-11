@@ -8,8 +8,6 @@ const TIMEOUT = Number(import.meta.env.VITE_API_TIMEOUT);
 export const apiClient: AxiosInstance = axios.create({
   baseURL: BASE_URL,
   withCredentials: true,
-  xsrfCookieName: 'csrftoken',
-  xsrfHeaderName: 'X-CSRFToken',
   headers: {
     'Content-Type': 'application/json',
   },
