@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { useLocation, useNavigate } from 'react-router-dom';
+import type * as Types from '@customtypes/index';
 
 import { AuthForm, AuthFormType } from '@components/compounds';
-import type * as Types from '@types/';
 import { useAppDispatch, useAppSelector } from '@store/redux';
 import { registerUser } from '@store/userSlice';
 

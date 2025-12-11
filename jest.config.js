@@ -13,7 +13,7 @@ export default {
     '^@components/(.*)$': '<rootDir>/src/components/$1',
     '^@assets/(.*)$': '<rootDir>/src/assets/$1',
     '^@utils/(.*)$': '<rootDir>/src/utils/$1',
-    '^@types/(.*)$': '<rootDir>/src/types/$1',
+    '^@customtypes/(.*)$': '<rootDir>/src/types/$1',
     '^@store/(.*)$': '<rootDir>/src/store/$1',
     '^@hooks/(.*)$': '<rootDir>/src/hooks/$1',
     '^@services/(.*)$': '<rootDir>/src/services/$1',
