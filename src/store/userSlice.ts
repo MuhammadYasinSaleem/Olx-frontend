@@ -3,6 +3,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import {
   loginUser as loginUserService,
+  logoutUser as logoutUserService,
   registerUser as registerUserService,
 } from '@services/auth.service';
 
@@ -33,6 +34,22 @@ export const loginUser = createAsyncThunk<
   } catch (error: any) {
     return rejectWithValue({
       message: error?.message || 'Login failed',
+      status: error?.status,
+    });
+  }
+});
+
+export const logoutUser = createAsyncThunk<
+  void,
+  void,
+  { rejectValue: { message: string; status?: number } }
+>('user/logout', async (_, { rejectWithValue }) => {
+  try {
+    await logoutUserService();
+    return undefined;
+  } catch (error: any) {
+    return rejectWithValue({
+      message: error?.message || 'Logout failed',
       status: error?.status,
     });
   }
@@ -89,6 +106,21 @@ const userSlice = createSlice({
         state.error = null;
       })
       .addCase(loginUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload || { message: 'Unknown error' };
+      });
+
+    builder
+      .addCase(logoutUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(logoutUser.fulfilled, (state) => {
+        state.loading = false;
+        state.user = null;
+        state.error = null;
+      })
+      .addCase(logoutUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload || { message: 'Unknown error' };
       });

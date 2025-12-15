@@ -19,3 +19,7 @@ export async function loginUser(payload: {
   const res = await apiClient.post<Types.UserResponse>('user/login/', payload);
   return res.data;
 }
+
+export async function logoutUser(): Promise<void> {
+  await apiClient.post('user/logout/');
+}
