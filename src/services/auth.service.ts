@@ -11,3 +11,11 @@ export async function registerUser(
   );
   return res.data;
 }
+
+export async function loginUser(payload: {
+  username: string;
+  password: string;
+}): Promise<Types.UserResponse> {
+  const res = await apiClient.post<Types.UserResponse>('user/login/', payload);
+  return res.data;
+}

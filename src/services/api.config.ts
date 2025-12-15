@@ -1,9 +1,8 @@
 import axios, { AxiosError } from 'axios';
 import type { AxiosInstance } from 'axios';
 
-const BASE_URL =
-  import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api';
-const TIMEOUT = Number(import.meta.env.VITE_API_TIMEOUT);
+const BASE_URL = (import.meta as any).env.VITE_API_BASE_URL;
+const TIMEOUT = Number((import.meta as any).env.VITE_API_TIMEOUT);
 
 export const apiClient: AxiosInstance = axios.create({
   baseURL: BASE_URL,

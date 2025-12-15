@@ -5,7 +5,7 @@ import type * as Types from '@customtypes/index';
 
 import { AuthForm, AuthFormType } from '@components/compounds';
 import { useAppDispatch, useAppSelector } from '@store/redux';
-import { registerUser } from '@store/userSlice';
+import { loginUser, registerUser } from '@store/userSlice';
 
 export const AuthPage = () => {
   const navigate = useNavigate();
@@ -41,9 +41,18 @@ export const AuthPage = () => {
           toast.error(result.payload?.message || 'Registration failed');
         }
       } else {
-        // TODO: Implement sign in logic
-        console.log('Sign in:', data);
-        toast.success('Sign in functionality coming soon!');
+        const result = await dispatch(
+          loginUser(data as { username: string; password: string }),
+        );
+
+        if (loginUser.fulfilled.match(result)) {
+          toast.success('Signed in successfully!');
+          setTimeout(() => {
+            navigate('/');
+          }, 500);
+        } else if (loginUser.rejected.match(result)) {
+          toast.error(result.payload?.message || 'Sign in failed');
+        }
       }
     } catch (_err) {
       toast.error('An unexpected error occurred');
