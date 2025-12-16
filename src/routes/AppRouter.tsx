@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import { Layout } from '@components/compounds';
-import { AuthPage, HomePage } from '@components/pages';
+import { AuthPage, HomePage, ProductsPage } from '@components/pages';
 
 import { ProtectedRoute } from './ProtectedRoute';
 import { ROUTES } from './routes.config';
@@ -11,10 +11,8 @@ export const AppRoutes: React.FC = () => (
   <Routes>
     <Route path={ROUTES.SIGNIN} element={<AuthPage />} />
     <Route path={ROUTES.SIGNUP} element={<AuthPage />} />
-
+    <Route path={ROUTES.HOME} element={<HomePage />} />
     <Route element={<Layout />}>
-      <Route path={ROUTES.HOME} element={<HomePage />} />
-
       <Route
         path={ROUTES.DASHBOARD}
         element={
@@ -24,10 +22,7 @@ export const AppRoutes: React.FC = () => (
         }
       />
 
-      <Route
-        path={ROUTES.PRODUCTS}
-        element={<div>Products - Coming Soon</div>}
-      />
+      <Route path={ROUTES.PRODUCTS} element={<ProductsPage />} />
 
       <Route
         path={ROUTES.SETTINGS}
