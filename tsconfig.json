@@ -1,37 +1,36 @@
 {
   "compilerOptions": {
     "target": "ES2020",
-    "useDefineForClassFields": true,
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
-    "skipLibCheck": true,
-
-    /* Bundler mode */
     "moduleResolution": "bundler",
+    "moduleDetection": "force",
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
-    "moduleDetection": "force",
     "noEmit": true,
     "jsx": "react-jsx",
-
-    /* Linting */
+    "types": ["vite/client"],
+    "skipLibCheck": true,
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-
-    /* Path Aliases */
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-      "@components/*": ["src/components/*"],
-      "@assets/*": ["src/assets/*"],
-      "@utils/*": ["src/utils/*"],
-      "@customtypes/*": ["src/types/*"],
-      "@store/*": ["src/store/*"],
-      "@hooks/*": ["src/hooks/*"],
-      "@services/*": ["src/services/*"],
-      "@routes/*": ["src/routes/*"]
+      "@": ["src"],
+      "@components": ["src/components"],
+      "@components/atoms": ["src/components/atoms"],
+      "@components/molecules": ["src/components/molecules"],
+      "@components/compounds": ["src/components/compounds"],
+      "@components/pages": ["src/components/pages"],
+      "@assets": ["src/assets"],
+      "@utils": ["src/utils"],
+      "@types": ["src/types"],
+      "@store": ["src/store"],
+      "@hooks": ["src/hooks"],
+      "@services": ["src/services"],
+      "@routes": ["src/routes"],
+      "@configurations": ["src/configurations"]
     }
   },
   "include": ["src"]
