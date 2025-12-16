@@ -21,7 +21,7 @@ export const Button = ({
 
   const variants = {
     primary:
-      'bg-gradient-to-r from-cyan-500 to-blue-500 text-white hover:from-cyan-600 hover:to-blue-600 shadow-lg hover:shadow-xl',
+      'bg-linear-to-r from-cyan-500 to-blue-500 text-white hover:from-cyan-600 hover:to-blue-600 shadow-lg hover:shadow-xl',
     secondary: 'bg-gray-200 text-gray-800 hover:bg-gray-300',
     outline: 'border-2 border-cyan-500 text-cyan-600 hover:bg-cyan-50',
   };

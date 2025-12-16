@@ -1,8 +1,8 @@
 import { FormEvent, useState } from 'react';
-import type * as Types from '@customtypes/index';
 import { Eye, EyeOff, X } from 'lucide-react';
 
 import { Button, Checkbox, Input } from '@components/atoms';
+import type * as Types from '@types';
 
 export type AuthFormType = 'signin' | 'signup';
 
@@ -52,8 +52,8 @@ export const AuthForm = ({
 
     if (!formData.password.trim()) {
       newErrors.password = 'Password is required';
-    } else if (formData.password.length < 6) {
-      newErrors.password = 'Password must be at least 6 characters';
+    } else if (formData.password.length < 8) {
+      newErrors.password = 'Password must be at least 8 characters';
     }
 
     if (isSignUp) {
@@ -134,7 +134,7 @@ export const AuthForm = ({
 
         {/* Username */}
         <Input
-          label="Name"
+          label="Username"
           type="text"
           placeholder="Username"
           value={formData.username}
@@ -182,7 +182,7 @@ export const AuthForm = ({
           <Input
             label="Country"
             type="text"
-            placeholder="123 Main St"
+            placeholder="Pakistan"
             value={formData.address}
             onChange={(e) => handleChange('address', e.target.value)}
           />
@@ -231,7 +231,7 @@ export const AuthForm = ({
                   setErrors((prev) => ({ ...prev, terms: '' }));
                 }
               }}
-              label="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod lorem ipsum dolor sit amet, consectetaur adipiscing elit, sed eiusmod"
+              label="I agree to the Terms of Service and Privacy Policy"
             />
             {errors.terms && (
               <p className="mt-1 text-xs text-red-500">{errors.terms}</p>
