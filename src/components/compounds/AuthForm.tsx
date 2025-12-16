@@ -94,7 +94,6 @@ export const AuthForm = ({
 
   const handleChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
-    // Clear error when user starts typing
     if (errors[field]) {
       setErrors((prev) => ({ ...prev, [field]: '' }));
     }
@@ -102,7 +101,6 @@ export const AuthForm = ({
 
   return (
     <div className="relative bg-white rounded-2xl shadow-2xl max-w-md w-full p-8">
-      {/* Close button */}
       {onClose && (
         <button
           onClick={onClose}
@@ -115,7 +113,6 @@ export const AuthForm = ({
         </button>
       )}
 
-      {/* Title */}
       {title && (
         <div className="mb-6">
           <h2 className="text-2xl font-bold text-center bg-linear-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">
@@ -125,14 +122,12 @@ export const AuthForm = ({
       )}
 
       <form onSubmit={handleSubmit} className="space-y-5">
-        {/* Global error */}
         {error && (
           <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">
             {error}
           </div>
         )}
 
-        {/* Username */}
         <Input
           label="Username"
           type="text"
@@ -143,7 +138,6 @@ export const AuthForm = ({
           required
         />
 
-        {/* Email (signup only) */}
         {isSignUp && (
           <Input
             label="Email address"
@@ -155,7 +149,6 @@ export const AuthForm = ({
           />
         )}
 
-        {/* First Name (signup only) */}
         {isSignUp && (
           <Input
             label="First Name"
@@ -166,7 +159,6 @@ export const AuthForm = ({
           />
         )}
 
-        {/* Last Name (signup only) */}
         {isSignUp && (
           <Input
             label="Last Name"

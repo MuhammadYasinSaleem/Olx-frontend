@@ -24,7 +24,6 @@ export const Header = () => {
     <header className="bg-white shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          {/* Logo */}
           <button
             onClick={() => navigate('/')}
             className="flex items-center gap-2 hover:opacity-80 transition-opacity"
@@ -48,22 +47,18 @@ export const Header = () => {
             <span className="text-2xl font-bold text-gray-800">Shop</span>
           </button>
 
-          {/* Navigation and Actions */}
           <div className="flex items-center gap-4">
-            {/* Cart Button */}
             <button
               onClick={() => navigate('/cart')}
               className="relative p-2 hover:bg-gray-100 rounded-full transition-colors"
               aria-label="Shopping Cart"
             >
               <ShoppingCart className="w-6 h-6 text-gray-700" />
-              {/* Cart badge - you can add item count later */}
               <span className="absolute -top-1 -right-1 bg-cyan-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
                 0
               </span>
             </button>
 
-            {/* Auth Buttons */}
             {user ? (
               <div className="flex items-center gap-3">
                 <span className="text-sm text-gray-600 hidden sm:inline">
