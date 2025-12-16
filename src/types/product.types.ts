@@ -18,4 +18,10 @@ export type ProductsApiResponse = {
   data: Product[];
 };
 
+export type ProductApiResponse = {
+  success: boolean;
+  message: string;
+  data: Product;
+};
+
 export type ProductsResponse = Product[];

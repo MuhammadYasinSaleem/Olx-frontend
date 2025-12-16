@@ -2,7 +2,12 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import { Layout } from '@components/compounds';
-import { AuthPage, HomePage, ProductsPage } from '@components/pages';
+import {
+  AuthPage,
+  HomePage,
+  ProductDetailPage,
+  ProductsPage,
+} from '@components/pages';
 
 import { ProtectedRoute } from './ProtectedRoute';
 import { ROUTES } from './routes.config';
@@ -23,6 +28,8 @@ export const AppRoutes: React.FC = () => (
       />
 
       <Route path={ROUTES.PRODUCTS} element={<ProductsPage />} />
+
+      <Route path={ROUTES.PRODUCT_DETAIL} element={<ProductDetailPage />} />
 
       <Route
         path={ROUTES.SETTINGS}
