@@ -4,7 +4,7 @@ export type UserRequest = {
   first_name?: string;
   last_name?: string;
   phone_no?: string;
-  address?: string | number;
+  address?: string;
   password: string;
 };
 
@@ -15,5 +15,5 @@ export type UserResponse = {
   first_name?: string;
   last_name?: string;
   phone_no?: string;
-  address?: string | number;
+  address?: string;
 };
