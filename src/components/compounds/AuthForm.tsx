@@ -72,7 +72,6 @@ export const AuthForm = ({
         />
       )}
 
-      {/* Toggle form link */}
       <div className="text-center text-sm text-gray-600 mt-5">
         {isSignUp ? 'Already have an account?' : "Don't have an account?"}{' '}
         <button

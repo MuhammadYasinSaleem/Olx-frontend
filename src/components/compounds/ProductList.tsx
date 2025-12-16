@@ -20,7 +20,6 @@ export const ProductList = ({
     if (onAddToCart) {
       onAddToCart(_product);
     } else {
-      // Default behavior if no handler provided
       toast.success(`Added ${_product.product_name} to cart!`);
     }
   };

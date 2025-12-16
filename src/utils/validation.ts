@@ -1,5 +1,3 @@
-// Validation utility functions for forms
-
 export interface ValidationErrors {
   [key: string]: string;
 }
@@ -19,11 +17,6 @@ export interface SignupFormData {
   password: string;
 }
 
-/**
- * Validates signin form data
- * @param formData - The signin form data to validate
- * @returns Object containing validation errors (empty if valid)
- */
 export const validateSigninForm = (
   formData: SigninFormData,
 ): ValidationErrors => {
@@ -42,12 +35,6 @@ export const validateSigninForm = (
   return errors;
 };
 
-/**
- * Validates signup form data
- * @param formData - The signup form data to validate
- * @param agreedToTerms - Whether user agreed to terms and conditions
- * @returns Object containing validation errors (empty if valid)
- */
 export const validateSignupForm = (
   formData: SignupFormData,
   agreedToTerms: boolean,
@@ -79,10 +66,5 @@ export const validateSignupForm = (
   return errors;
 };
 
-/**
- * Checks if validation errors object is empty
- * @param errors - Validation errors object
- * @returns true if no errors, false otherwise
- */
 export const isValidForm = (errors: ValidationErrors): boolean =>
   Object.keys(errors).length === 0;

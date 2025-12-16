@@ -10,7 +10,6 @@ export interface ProductCardProps {
 
 export const ProductCard = ({ product, onAddToCart }: ProductCardProps) => (
   <div className="bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100">
-    {/* Header with category and quantity */}
     <div className="p-4 pb-0">
       <div className="flex items-center justify-between mb-3">
         <span className="text-sm font-medium text-gray-700 bg-gray-100 px-3 py-1 rounded-full">
@@ -23,7 +22,6 @@ export const ProductCard = ({ product, onAddToCart }: ProductCardProps) => (
       </div>
     </div>
 
-    {/* Product Image */}
     <div className="px-4">
       {product.product_img_url ? (
         <img
@@ -38,7 +36,6 @@ export const ProductCard = ({ product, onAddToCart }: ProductCardProps) => (
       )}
     </div>
 
-    {/* Content */}
     <div className="p-4">
       <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-1">
         {product.product_name}
@@ -53,7 +50,6 @@ export const ProductCard = ({ product, onAddToCart }: ProductCardProps) => (
         <span className="font-semibold text-gray-700">{product.user_name}</span>
       </div>
 
-      {/* Price and Add to Cart */}
       <div className="flex items-center justify-between">
         <span className="text-2xl font-bold text-gray-900">
           ${product.price}
