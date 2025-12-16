@@ -1,11 +1,11 @@
-import type * as Types from '@customtypes/index';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
+import type * as Types from '@types';
 import {
   loginUser as loginUserService,
   logoutUser as logoutUserService,
   registerUser as registerUserService,
-} from '@services/auth.service';
+} from '@services';
 
 export const registerUser = createAsyncThunk<
   Types.UserResponse,
