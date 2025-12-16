@@ -1,11 +1,15 @@
 import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { useLocation, useNavigate } from 'react-router-dom';
-import type * as Types from '@customtypes/index';
 
 import { AuthForm, AuthFormType } from '@components/compounds';
-import { useAppDispatch, useAppSelector } from '@store/redux';
-import { loginUser, registerUser } from '@store/userSlice';
+import type * as Types from '@types';
+import {
+  loginUser,
+  registerUser,
+  useAppDispatch,
+  useAppSelector,
+} from '@store';
 
 export const AuthPage = () => {
   const navigate = useNavigate();
@@ -35,7 +39,7 @@ export const AuthPage = () => {
         if (registerUser.fulfilled.match(result)) {
           toast.success('Account created successfully!');
           setTimeout(() => {
-            navigate('/');
+            navigate('/products');
           }, 1000);
         } else if (registerUser.rejected.match(result)) {
           toast.error(result.payload?.message || 'Registration failed');
@@ -48,7 +52,7 @@ export const AuthPage = () => {
         if (loginUser.fulfilled.match(result)) {
           toast.success('Signed in successfully!');
           setTimeout(() => {
-            navigate('/');
+            navigate('/products');
           }, 500);
         } else if (loginUser.rejected.match(result)) {
           toast.error(result.payload?.message || 'Sign in failed');
@@ -61,7 +65,7 @@ export const AuthPage = () => {
 
   useEffect(() => {
     if (user) {
-      navigate('/');
+      navigate('/products');
     }
   }, [user, navigate]);
 
