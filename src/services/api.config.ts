@@ -11,6 +11,9 @@ export const apiClient: AxiosInstance = axios.create({
     'Content-Type': 'application/json',
   },
   timeout: TIMEOUT,
+  xsrfCookieName: 'csrftoken',
+  xsrfHeaderName: 'X-CSRFToken',
+  withXSRFToken: true,
 });
 
 apiClient.interceptors.response.use(

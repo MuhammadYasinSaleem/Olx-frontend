@@ -1,6 +1,6 @@
-import type * as Types from '@customtypes/index';
+import type * as Types from '@types';
 
-import { apiClient } from '@services/api.config';
+import { apiClient } from './api.config';
 
 export async function registerUser(
   payload: Types.UserRequest,

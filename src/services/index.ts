@@ -1,3 +1,4 @@
 import { loginUser, logoutUser, registerUser } from './auth.service';
+import { getProducts } from './product.service';
 
-export { loginUser, logoutUser, registerUser };
+export { getProducts, loginUser, logoutUser, registerUser };
