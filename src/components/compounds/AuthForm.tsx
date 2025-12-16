@@ -169,10 +169,9 @@ export const AuthForm = ({
           />
         )}
 
-        {/* Country/Address (signup only) */}
         {isSignUp && (
           <Input
-            label="Country"
+            label="Address"
             type="text"
             placeholder="Pakistan"
             value={formData.address}
