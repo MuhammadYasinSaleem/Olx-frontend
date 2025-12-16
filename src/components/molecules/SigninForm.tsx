@@ -2,6 +2,7 @@ import { FormEvent, useState } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
 
 import { Button, Input } from '@components/atoms';
+import { isValidForm, validateSigninForm, type ValidationErrors } from '@utils';
 
 export interface SigninFormProps {
   onSubmit: (_data: { username: string; password: string }) => void;
@@ -16,23 +17,12 @@ export const SigninForm = ({ onSubmit, loading, error }: SigninFormProps) => {
     password: '',
   });
 
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState<ValidationErrors>({});
 
   const validate = () => {
-    const newErrors: Record<string, string> = {};
-
-    if (!formData.username.trim()) {
-      newErrors.username = 'Username is required';
-    }
-
-    if (!formData.password.trim()) {
-      newErrors.password = 'Password is required';
-    } else if (formData.password.length < 8) {
-      newErrors.password = 'Password must be at least 8 characters';
-    }
-
+    const newErrors = validateSigninForm(formData);
     setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    return isValidForm(newErrors);
   };
 
   const handleSubmit = (e: FormEvent) => {

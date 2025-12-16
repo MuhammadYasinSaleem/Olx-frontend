@@ -2,6 +2,7 @@ import { FormEvent, useState } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
 
 import { Button, Checkbox, Input } from '@components/atoms';
+import { isValidForm, validateSignupForm, type ValidationErrors } from '@utils';
 import type * as Types from '@types';
 
 export interface SignupFormProps {
@@ -23,35 +24,12 @@ export const SignupForm = ({ onSubmit, loading, error }: SignupFormProps) => {
     password: '',
   });
 
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState<ValidationErrors>({});
 
   const validate = () => {
-    const newErrors: Record<string, string> = {};
-
-    if (!formData.username.trim()) {
-      newErrors.username = 'Username is required';
-    }
-
-    if (!formData.password.trim()) {
-      newErrors.password = 'Password is required';
-    } else if (formData.password.length < 8) {
-      newErrors.password = 'Password must be at least 8 characters';
-    }
-
-    if (formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Invalid email format';
-    }
-
-    if (formData.phone_no && !/^\+?[\d\s-()]+$/.test(formData.phone_no)) {
-      newErrors.phone_no = 'Invalid phone number format';
-    }
-
-    if (!agreedToTerms) {
-      newErrors.terms = 'You must agree to the terms';
-    }
-
+    const newErrors = validateSignupForm(formData, agreedToTerms);
     setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    return isValidForm(newErrors);
   };
 
   const handleSubmit = (e: FormEvent) => {
@@ -115,7 +93,7 @@ export const SignupForm = ({ onSubmit, loading, error }: SignupFormProps) => {
       <Input
         label="Address"
         type="text"
-        placeholder="Pakistan"
+        placeholder="123 houston st"
         value={formData.address}
         onChange={(e) => handleChange('address', e.target.value)}
       />
