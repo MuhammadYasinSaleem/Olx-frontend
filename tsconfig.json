@@ -30,6 +30,7 @@
       "@hooks": ["src/hooks"],
       "@services": ["src/services"],
       "@routes": ["src/routes"],
+      "@constants": ["src/constants"],
       "@configurations": ["src/configurations"]
     }
   },

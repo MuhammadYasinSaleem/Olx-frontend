@@ -1,0 +1,4 @@
+export const AUTH_REDIRECT_DELAYS = {
+  SIGNUP_SUCCESS: 1000,
+  SIGNIN_SUCCESS: 500,
+} as const;

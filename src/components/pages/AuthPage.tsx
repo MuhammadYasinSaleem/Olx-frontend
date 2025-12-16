@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { AUTH_REDIRECT_DELAYS } from '@constants';
 
 import { AuthForm, AuthFormType } from '@components/compounds';
 import type * as Types from '@types';
@@ -40,7 +41,7 @@ export const AuthPage = () => {
           toast.success('Account created successfully!');
           setTimeout(() => {
             navigate('/products');
-          }, 1000);
+          }, AUTH_REDIRECT_DELAYS.SIGNUP_SUCCESS);
         } else if (registerUser.rejected.match(result)) {
           toast.error(result.payload?.message || 'Registration failed');
         }
@@ -53,7 +54,7 @@ export const AuthPage = () => {
           toast.success('Signed in successfully!');
           setTimeout(() => {
             navigate('/products');
-          }, 500);
+          }, AUTH_REDIRECT_DELAYS.SIGNIN_SUCCESS);
         } else if (loginUser.rejected.match(result)) {
           toast.error(result.payload?.message || 'Sign in failed');
         }
