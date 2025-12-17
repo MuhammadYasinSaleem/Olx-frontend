@@ -4,9 +4,13 @@ import { Route, Routes } from 'react-router-dom';
 import { Layout } from '@components/compounds';
 import {
   AuthPage,
+  CartPage,
+  CreateProductPage,
   HomePage,
+  OrdersPage,
   ProductDetailPage,
   ProductsPage,
+  ProfilePage,
 } from '@components/pages';
 
 import { ProtectedRoute } from './ProtectedRoute';
@@ -30,6 +34,28 @@ export const AppRoutes: React.FC = () => (
       <Route path={ROUTES.PRODUCTS} element={<ProductsPage />} />
 
       <Route path={ROUTES.PRODUCT_DETAIL} element={<ProductDetailPage />} />
+
+      <Route
+        path={ROUTES.CREATE_PRODUCT}
+        element={
+          <ProtectedRoute>
+            <CreateProductPage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route path={ROUTES.CART} element={<CartPage />} />
+
+      <Route path={ROUTES.ORDERS} element={<OrdersPage />} />
+
+      <Route
+        path={ROUTES.PROFILE}
+        element={
+          <ProtectedRoute>
+            <ProfilePage />
+          </ProtectedRoute>
+        }
+      />
 
       <Route
         path={ROUTES.SETTINGS}

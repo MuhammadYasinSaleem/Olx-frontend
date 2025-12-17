@@ -12,6 +12,8 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
+import cartReducer from './cartSlice';
+import orderReducer from './orderSlice';
 import productReducer from './productSlice';
 import userReducer from './userSlice';
 
@@ -19,15 +21,25 @@ const persistConfig = {
   key: 'root',
   version: 1,
   storage,
-  whitelist: ['user'],
+  whitelist: ['user', 'cart'],
 };
 
-const persistedReducer = persistReducer(persistConfig, userReducer);
+const persistedUserReducer = persistReducer(
+  { ...persistConfig, key: 'user' },
+  userReducer,
+);
+
+const persistedCartReducer = persistReducer(
+  { ...persistConfig, key: 'cart' },
+  cartReducer,
+);
 
 export const store = configureStore({
   reducer: {
-    user: persistedReducer,
+    user: persistedUserReducer,
     products: productReducer,
+    cart: persistedCartReducer,
+    orders: orderReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
