@@ -1,4 +1,21 @@
-import { loginUser, logoutUser, registerUser } from './auth.service';
-import { getProductById, getProducts } from './product.service';
+import {
+  getUserProfile,
+  loginUser,
+  logoutUser,
+  registerUser,
+} from './auth.service';
+import { createOrder, getOrderById, getOrders } from './order.service';
+import { createProduct, getProductById, getProducts } from './product.service';
 
-export { getProductById, getProducts, loginUser, logoutUser, registerUser };
+export {
+  createOrder,
+  createProduct,
+  getOrderById,
+  getOrders,
+  getProductById,
+  getProducts,
+  getUserProfile,
+  loginUser,
+  logoutUser,
+  registerUser,
+};
