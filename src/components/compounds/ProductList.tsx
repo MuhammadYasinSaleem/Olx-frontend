@@ -1,5 +1,3 @@
-import toast from 'react-hot-toast';
-
 import { ProductCard } from '@components/molecules';
 import type * as Types from '@types';
 
@@ -7,23 +5,9 @@ export interface ProductListProps {
   products: Types.Product[];
   loading?: boolean;
   error?: string | null;
-  onAddToCart?: (_product: Types.Product) => void;
 }
 
-export const ProductList = ({
-  products,
-  loading,
-  error,
-  onAddToCart,
-}: ProductListProps) => {
-  const handleAddToCart = (_product: Types.Product) => {
-    if (onAddToCart) {
-      onAddToCart(_product);
-    } else {
-      toast.success(`Added ${_product.product_name} to cart!`);
-    }
-  };
-
+export const ProductList = ({ products, loading, error }: ProductListProps) => {
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-64">
@@ -51,11 +35,7 @@ export const ProductList = ({
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       {products.map((product) => (
-        <ProductCard
-          key={product.id}
-          product={product}
-          onAddToCart={handleAddToCart}
-        />
+        <ProductCard key={product.id} product={product} />
       ))}
     </div>
   );

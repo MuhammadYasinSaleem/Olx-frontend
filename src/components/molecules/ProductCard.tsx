@@ -1,23 +1,42 @@
 import React from 'react';
+import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { Package, ShoppingCart } from 'lucide-react';
 
 import { Button } from '@components/atoms';
 import type * as Types from '@types';
+import { addToCart, useAppDispatch } from '@store';
 
 export interface ProductCardProps {
   product: Types.Product;
-  onAddToCart?: (_product: Types.Product) => void;
 }
 
-export const ProductCard = ({ product, onAddToCart }: ProductCardProps) => {
+export const ProductCard = ({ product }: ProductCardProps) => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const handleCardClick = (e: React.MouseEvent) => {
     if ((e.target as HTMLElement).closest('button')) {
       return;
     }
     navigate(`/products/${product.id}`);
+  };
+
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.stopPropagation();
+
+    const cartPayload: Types.AddToCartPayload = {
+      id: product.id,
+      product_name: product.product_name,
+      price: product.price,
+      product_img_url: product.product_img_url,
+      maxQuantity: product.quantity,
+      user_name: product.user_name,
+      category_name: product.category_name,
+    };
+
+    dispatch(addToCart(cartPayload));
+    toast.success(`Added ${product.product_name} to cart!`);
   };
 
   return (
@@ -73,11 +92,12 @@ export const ProductCard = ({ product, onAddToCart }: ProductCardProps) => {
           </span>
           <Button
             variant="primary"
-            onClick={() => onAddToCart?.(product)}
-            className="flex items-center gap-2 px-4 py-2 bg-gray-900 hover:bg-gray-800 text-white rounded-full font-medium transition-colors"
+            onClick={handleAddToCart}
+            disabled={product.quantity === 0}
+            className="flex items-center gap-2 px-4 py-2 bg-gray-900 hover:bg-gray-800 text-white rounded-full font-medium transition-colors disabled:bg-gray-400"
           >
             <ShoppingCart size={16} />
-            Add to Cart
+            {product.quantity === 0 ? 'Out of Stock' : 'Add to Cart'}
           </Button>
         </div>
       </div>
