@@ -23,3 +23,8 @@ export async function loginUser(payload: {
 export async function logoutUser(): Promise<void> {
   await apiClient.post('user/logout/');
 }
+
+export async function getUserProfile(): Promise<Types.UserResponse> {
+  const res = await apiClient.get<Types.UserResponse>('user/profile/');
+  return res.data;
+}
