@@ -12,6 +12,15 @@ export type Product = {
   category_name: string;
 };
 
+export type ProductRequest = {
+  product_name: string;
+  quantity?: number;
+  description?: string;
+  price: string;
+  product_img?: File;
+  category: number;
+};
+
 export type ProductsApiResponse = {
   success: boolean;
   message: string;
@@ -22,6 +31,13 @@ export type ProductApiResponse = {
   success: boolean;
   message: string;
   data: Product;
+};
+
+export type CreateProductApiResponse = {
+  success: boolean;
+  message: string;
+  data: Product;
+  errors: any;
 };
 
 export type ProductsResponse = Product[];

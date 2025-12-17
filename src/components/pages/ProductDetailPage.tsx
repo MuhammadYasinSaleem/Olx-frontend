@@ -11,7 +11,9 @@ import {
 } from 'lucide-react';
 
 import { Button } from '@components/atoms';
+import type * as Types from '@types';
 import {
+  addToCart,
   clearCurrentProduct,
   fetchProductById,
   useAppDispatch,
@@ -41,6 +43,17 @@ export const ProductDetailPage = () => {
 
   const handleAddToCart = () => {
     if (currentProduct) {
+      const cartPayload: Types.AddToCartPayload = {
+        id: currentProduct.id,
+        product_name: currentProduct.product_name,
+        price: currentProduct.price,
+        product_img_url: currentProduct.product_img_url,
+        maxQuantity: currentProduct.quantity,
+        user_name: currentProduct.user_name,
+        category_name: currentProduct.category_name,
+      };
+
+      dispatch(addToCart(cartPayload));
       toast.success(`Added ${currentProduct.product_name} to cart!`);
     }
   };
