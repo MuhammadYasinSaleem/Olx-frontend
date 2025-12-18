@@ -250,7 +250,7 @@ export const OrdersPage = () => {
                   Start shopping to place your first order!
                 </p>
                 <Button
-                  onClick={() => navigate('/products')}
+                  onClick={() => navigate('/')}
                   className="bg-gray-900 hover:bg-gray-800 text-white px-6 sm:px-8 py-2 sm:py-3"
                 >
                   Browse Products

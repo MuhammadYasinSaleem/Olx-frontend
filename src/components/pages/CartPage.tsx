@@ -32,7 +32,7 @@ export const CartPage = () => {
   };
 
   const handleGoBack = () => {
-    navigate('/products');
+    navigate('/');
   };
 
   const handleCheckout = () => {

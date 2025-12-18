@@ -47,7 +47,7 @@ export const ProfilePage = () => {
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
           <p className="text-red-600 mb-4">Error: {error.message}</p>
-          <Button onClick={() => navigate('/products')} variant="primary">
+          <Button onClick={() => navigate('/')} variant="primary">
             Go to Products
           </Button>
         </div>

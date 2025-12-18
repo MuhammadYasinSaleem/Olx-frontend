@@ -6,7 +6,6 @@ import {
   AuthPage,
   CartPage,
   CreateProductPage,
-  HomePage,
   MyProductsPage,
   OrdersPage,
   ProductDetailPage,
@@ -21,7 +20,6 @@ export const AppRoutes: React.FC = () => (
   <Routes>
     <Route path={ROUTES.SIGNIN} element={<AuthPage />} />
     <Route path={ROUTES.SIGNUP} element={<AuthPage />} />
-    <Route path={ROUTES.HOME} element={<HomePage />} />
     <Route element={<Layout />}>
       <Route
         path={ROUTES.DASHBOARD}
@@ -32,7 +30,7 @@ export const AppRoutes: React.FC = () => (
         }
       />
 
-      <Route path={ROUTES.PRODUCTS} element={<ProductsPage />} />
+      <Route path={ROUTES.HOME} element={<ProductsPage />} />
 
       <Route path={ROUTES.PRODUCT_DETAIL} element={<ProductDetailPage />} />
 

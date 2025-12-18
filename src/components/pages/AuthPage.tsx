@@ -40,7 +40,7 @@ export const AuthPage = () => {
         if (registerUser.fulfilled.match(result)) {
           toast.success('Account created successfully!');
           setTimeout(() => {
-            navigate('/products');
+            navigate('/');
           }, AUTH_REDIRECT_DELAYS.SIGNUP_SUCCESS);
         } else if (registerUser.rejected.match(result)) {
           toast.error(result.payload?.message || 'Registration failed');
@@ -53,7 +53,7 @@ export const AuthPage = () => {
         if (loginUser.fulfilled.match(result)) {
           toast.success('Signed in successfully!');
           setTimeout(() => {
-            navigate('/products');
+            navigate('/');
           }, AUTH_REDIRECT_DELAYS.SIGNIN_SUCCESS);
         } else if (loginUser.rejected.match(result)) {
           toast.error(result.payload?.message || 'Sign in failed');
@@ -66,7 +66,7 @@ export const AuthPage = () => {
 
   useEffect(() => {
     if (user) {
-      navigate('/products');
+      navigate('/');
     }
   }, [user, navigate]);
 

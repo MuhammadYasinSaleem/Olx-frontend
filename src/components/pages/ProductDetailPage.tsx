@@ -33,7 +33,7 @@ export const ProductDetailPage = () => {
     if (id && !isNaN(Number(id))) {
       dispatch(fetchProductById(Number(id)));
     } else {
-      navigate('/products');
+      navigate('/');
     }
 
     return () => {
@@ -59,7 +59,7 @@ export const ProductDetailPage = () => {
   };
 
   const handleGoBack = () => {
-    navigate('/products');
+    navigate('/');
   };
 
   if (productLoading) {

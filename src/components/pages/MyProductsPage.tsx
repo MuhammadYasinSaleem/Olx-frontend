@@ -68,7 +68,7 @@ export const MyProductsPage = () => {
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
           <p className="text-red-600 mb-4">Error: {error.message}</p>
-          <Button onClick={() => navigate('/products')} variant="primary">
+          <Button onClick={() => navigate('/')} variant="primary">
             Go to All Products
           </Button>
         </div>
@@ -181,7 +181,7 @@ export const MyProductsPage = () => {
               </Button>
               <Button
                 variant="outline"
-                onClick={() => navigate('/products')}
+                onClick={() => navigate('/')}
                 className="flex items-center justify-center gap-2 py-3"
               >
                 Browse All Products

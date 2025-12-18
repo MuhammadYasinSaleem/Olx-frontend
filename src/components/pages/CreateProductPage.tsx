@@ -143,7 +143,7 @@ export const CreateProductPage = () => {
 
       if (createProduct.fulfilled.match(result)) {
         toast.success('Product created successfully!');
-        navigate('/products');
+        navigate('/');
       } else if (createProduct.rejected.match(result)) {
         toast.error(result.payload?.message || 'Failed to create product');
       }
