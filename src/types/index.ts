@@ -16,6 +16,8 @@ import type {
 } from './order.types';
 import type {
   CreateProductApiResponse,
+  PaginatedProductsData,
+  PaginatedProductsResponse,
   Product,
   ProductApiResponse,
   ProductPatchRequest,
@@ -45,6 +47,8 @@ export type {
   OrdersApiResponse,
   OrdersResponse,
   OrderState,
+  PaginatedProductsData,
+  PaginatedProductsResponse,
   PatchedUserProfileUpdateRequest,
   Product,
   ProductApiResponse,

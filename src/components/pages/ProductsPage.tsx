@@ -3,32 +3,54 @@ import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { Plus } from 'lucide-react';
 
-import { Button } from '@components/atoms';
+import { Button, Pagination } from '@components/atoms';
 import { ProductList } from '@components/compounds';
 import { CategoryFilter } from '@components/molecules';
-import { fetchProducts, useAppDispatch, useAppSelector } from '@store';
+import {
+  fetchProductsPaginated,
+  setPage,
+  useAppDispatch,
+  useAppSelector,
+} from '@store';
 
 import { ROUTES } from '../../routes/routes.config';
 
 export const ProductsPage = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { filteredProducts, loading, error, selectedCategory } = useAppSelector(
-    (state) => state.products,
-  );
+  const {
+    filteredProducts,
+    loading,
+    error,
+    selectedCategory,
+    currentPage,
+    pageSize,
+    totalCount,
+    hasNext,
+    hasPrevious,
+    paginationLoading,
+  } = useAppSelector((state) => state.products);
   const { user } = useAppSelector((state) => state.user);
+
+  const totalPages = Math.ceil(totalCount / pageSize);
 
   useEffect(() => {
     const loadProducts = async () => {
-      const result = await dispatch(fetchProducts());
+      const result = await dispatch(
+        fetchProductsPaginated({ page: currentPage, pageSize }),
+      );
 
-      if (fetchProducts.rejected.match(result)) {
+      if (fetchProductsPaginated.rejected.match(result)) {
         toast.error(result.payload?.message || 'Failed to load products');
       }
     };
 
     loadProducts();
-  }, [dispatch]);
+  }, [dispatch, currentPage, pageSize]);
+
+  const handlePageChange = (page: number) => {
+    dispatch(setPage(page));
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -63,9 +85,21 @@ export const ProductsPage = () => {
         </div>
         <ProductList
           products={filteredProducts}
-          loading={loading}
+          loading={loading || paginationLoading}
           error={error?.message}
         />
+
+        {totalCount > 0 && (
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            hasNext={hasNext}
+            hasPrevious={hasPrevious}
+            onPageChange={handlePageChange}
+            loading={paginationLoading}
+            className="mt-8"
+          />
+        )}
       </div>
     </div>
   );

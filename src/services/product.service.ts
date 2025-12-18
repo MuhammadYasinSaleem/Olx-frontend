@@ -4,6 +4,16 @@ import { apiClient } from './api.config';
 
 export async function getProducts(): Promise<Types.ProductsResponse> {
   const res = await apiClient.get<Types.ProductsApiResponse>('products/');
+  return res.data.data.results;
+}
+
+export async function getProductsPaginated(
+  page: number = 1,
+  pageSize: number = 5,
+): Promise<Types.PaginatedProductsResponse> {
+  const res = await apiClient.get<Types.ProductsApiResponse>(
+    `products/?page=${page}&page_size=${pageSize}`,
+  );
   return res.data.data;
 }
 

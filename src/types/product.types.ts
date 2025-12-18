@@ -40,10 +40,18 @@ export type ProductPatchRequest = {
   category?: number;
 };
 
+export type PaginatedProductsData = {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: Product[];
+};
+
 export type ProductsApiResponse = {
   success: boolean;
   message: string;
-  data: Product[];
+  data: PaginatedProductsData;
+  errors: any;
 };
 
 export type ProductApiResponse = {
@@ -67,3 +75,5 @@ export type UpdateProductApiResponse = {
 };
 
 export type ProductsResponse = Product[];
+
+export type PaginatedProductsResponse = PaginatedProductsData;

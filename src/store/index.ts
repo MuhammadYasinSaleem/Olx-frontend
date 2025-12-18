@@ -25,7 +25,11 @@ export {
   createProduct,
   fetchProductById,
   fetchProducts,
+  fetchProductsPaginated,
   patchProduct,
+  resetPagination,
+  setPage,
+  setPageSize,
   setSelectedCategory,
   updateProduct,
 } from './productSlice';

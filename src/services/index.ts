@@ -11,6 +11,7 @@ import {
   createProduct,
   getProductById,
   getProducts,
+  getProductsPaginated,
   patchProduct,
   updateProduct,
 } from './product.service';
@@ -22,6 +23,7 @@ export {
   getOrders,
   getProductById,
   getProducts,
+  getProductsPaginated,
   getUserProfile,
   loginUser,
   logoutUser,

@@ -5,6 +5,7 @@ import {
   createProduct as createProductService,
   getProductById as getProductByIdService,
   getProducts as getProductsService,
+  getProductsPaginated as getProductsPaginatedService,
   patchProduct as patchProductService,
   updateProduct as updateProductService,
 } from '@services';
@@ -24,6 +25,25 @@ export const fetchProducts = createAsyncThunk<
     });
   }
 });
+
+export const fetchProductsPaginated = createAsyncThunk<
+  Types.PaginatedProductsResponse,
+  { page?: number; pageSize?: number },
+  { rejectValue: { message: string; status?: number } }
+>(
+  'products/fetchPaginated',
+  async ({ page = 1, pageSize = 5 }, { rejectWithValue }) => {
+    try {
+      const paginatedData = await getProductsPaginatedService(page, pageSize);
+      return paginatedData;
+    } catch (error: any) {
+      return rejectWithValue({
+        message: error?.message || 'Failed to fetch products',
+        status: error?.status,
+      });
+    }
+  },
+);
 
 export const fetchProductById = createAsyncThunk<
   Types.Product,
@@ -102,6 +122,12 @@ type ProductState = {
   createError: { message: string; status?: number } | null;
   updatingProduct: boolean;
   updateError: { message: string; status?: number } | null;
+  currentPage: number;
+  pageSize: number;
+  totalCount: number;
+  hasNext: boolean;
+  hasPrevious: boolean;
+  paginationLoading: boolean;
 };
 
 const initialState: ProductState = {
@@ -117,6 +143,12 @@ const initialState: ProductState = {
   createError: null,
   updatingProduct: false,
   updateError: null,
+  currentPage: 1,
+  pageSize: 5,
+  totalCount: 0,
+  hasNext: false,
+  hasPrevious: false,
+  paginationLoading: false,
 };
 
 const productSlice = createSlice({
@@ -143,6 +175,19 @@ const productSlice = createSlice({
     },
     clearUpdateError: (state) => {
       state.updateError = null;
+    },
+    setPage: (state, action) => {
+      state.currentPage = action.payload;
+    },
+    setPageSize: (state, action) => {
+      state.pageSize = action.payload;
+      state.currentPage = 1;
+    },
+    resetPagination: (state) => {
+      state.currentPage = 1;
+      state.totalCount = 0;
+      state.hasNext = false;
+      state.hasPrevious = false;
     },
     setSelectedCategory: (state, action) => {
       state.selectedCategory = action.payload;
@@ -179,6 +224,31 @@ const productSlice = createSlice({
       })
       .addCase(fetchProducts.rejected, (state, action) => {
         state.loading = false;
+        state.error = action.payload || { message: 'Unknown error' };
+      })
+
+      .addCase(fetchProductsPaginated.pending, (state) => {
+        state.paginationLoading = true;
+        state.error = null;
+      })
+      .addCase(fetchProductsPaginated.fulfilled, (state, action) => {
+        state.paginationLoading = false;
+        state.products = action.payload.results;
+        state.totalCount = action.payload.count;
+        state.hasNext = action.payload.next !== null;
+        state.hasPrevious = action.payload.previous !== null;
+
+        if (state.selectedCategory === null) {
+          state.filteredProducts = action.payload.results;
+        } else {
+          state.filteredProducts = action.payload.results.filter(
+            (product) => product.category_name === state.selectedCategory,
+          );
+        }
+        state.error = null;
+      })
+      .addCase(fetchProductsPaginated.rejected, (state, action) => {
+        state.paginationLoading = false;
         state.error = action.payload || { message: 'Unknown error' };
       })
       .addCase(fetchProductById.pending, (state) => {
@@ -279,5 +349,8 @@ export const {
   clearUpdateError,
   setSelectedCategory,
   clearFilter,
+  setPage,
+  setPageSize,
+  resetPagination,
 } = productSlice.actions;
 export default productSlice.reducer;
