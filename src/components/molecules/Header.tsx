@@ -1,6 +1,6 @@
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
-import { LogIn, LogOut, ShoppingCart, User } from 'lucide-react';
+import { LogIn, LogOut, Package, ShoppingCart, User } from 'lucide-react';
 
 import { logoutUser, useAppDispatch, useAppSelector } from '@store';
 
@@ -71,6 +71,14 @@ export const Header = () => {
                 <span className="text-xs sm:text-sm text-gray-600 hidden md:inline">
                   Welcome, <span className="font-medium">{user.username}</span>
                 </span>
+                <button
+                  onClick={() => navigate('/my-products')}
+                  className="flex items-center gap-1 px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm text-cyan-600 hover:bg-cyan-50 border border-cyan-300 rounded-lg font-medium transition-colors"
+                  title="View my products"
+                >
+                  <Package className="w-3 h-3 sm:w-4 sm:h-4" />
+                  <span className="hidden sm:inline">My Products</span>
+                </button>
                 <button
                   onClick={() => navigate('/profile')}
                   className="p-2 hover:bg-gray-100 rounded-full transition-colors"

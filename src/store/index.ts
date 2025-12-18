@@ -21,10 +21,13 @@ export {
   clearCurrentProduct,
   clearFilter,
   clearProducts,
+  clearUpdateError,
   createProduct,
   fetchProductById,
   fetchProducts,
+  patchProduct,
   setSelectedCategory,
+  updateProduct,
 } from './productSlice';
 export {
   clearProductError as clearCurrentProductError,

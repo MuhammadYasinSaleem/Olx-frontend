@@ -5,6 +5,8 @@ import {
   createProduct as createProductService,
   getProductById as getProductByIdService,
   getProducts as getProductsService,
+  patchProduct as patchProductService,
+  updateProduct as updateProductService,
 } from '@services';
 
 export const fetchProducts = createAsyncThunk<
@@ -55,6 +57,38 @@ export const createProduct = createAsyncThunk<
   }
 });
 
+export const updateProduct = createAsyncThunk<
+  Types.Product,
+  { id: number; productData: Types.ProductUpdateRequest },
+  { rejectValue: { message: string; status?: number } }
+>('products/update', async ({ id, productData }, { rejectWithValue }) => {
+  try {
+    const product = await updateProductService(id, productData);
+    return product;
+  } catch (error: any) {
+    return rejectWithValue({
+      message: error?.message || 'Failed to update product',
+      status: error?.status,
+    });
+  }
+});
+
+export const patchProduct = createAsyncThunk<
+  Types.Product,
+  { id: number; productData: Types.ProductPatchRequest },
+  { rejectValue: { message: string; status?: number } }
+>('products/patch', async ({ id, productData }, { rejectWithValue }) => {
+  try {
+    const product = await patchProductService(id, productData);
+    return product;
+  } catch (error: any) {
+    return rejectWithValue({
+      message: error?.message || 'Failed to patch product',
+      status: error?.status,
+    });
+  }
+});
+
 type ProductState = {
   products: Types.Product[];
   currentProduct: Types.Product | null;
@@ -66,6 +100,8 @@ type ProductState = {
   filteredProducts: Types.Product[];
   creatingProduct: boolean;
   createError: { message: string; status?: number } | null;
+  updatingProduct: boolean;
+  updateError: { message: string; status?: number } | null;
 };
 
 const initialState: ProductState = {
@@ -79,6 +115,8 @@ const initialState: ProductState = {
   filteredProducts: [],
   creatingProduct: false,
   createError: null,
+  updatingProduct: false,
+  updateError: null,
 };
 
 const productSlice = createSlice({
@@ -102,6 +140,9 @@ const productSlice = createSlice({
     },
     clearCreateError: (state) => {
       state.createError = null;
+    },
+    clearUpdateError: (state) => {
+      state.updateError = null;
     },
     setSelectedCategory: (state, action) => {
       state.selectedCategory = action.payload;
@@ -159,9 +200,8 @@ const productSlice = createSlice({
       })
       .addCase(createProduct.fulfilled, (state, action) => {
         state.creatingProduct = false;
-        // Add the new product to the products list
         state.products.unshift(action.payload);
-        // Update filtered products if no filter is applied
+
         if (state.selectedCategory === null) {
           state.filteredProducts.unshift(action.payload);
         } else if (action.payload.category_name === state.selectedCategory) {
@@ -172,6 +212,60 @@ const productSlice = createSlice({
       .addCase(createProduct.rejected, (state, action) => {
         state.creatingProduct = false;
         state.createError = action.payload || { message: 'Unknown error' };
+      })
+      .addCase(updateProduct.pending, (state) => {
+        state.updatingProduct = true;
+        state.updateError = null;
+      })
+      .addCase(updateProduct.fulfilled, (state, action) => {
+        state.updatingProduct = false;
+        const index = state.products.findIndex(
+          (product) => product.id === action.payload.id,
+        );
+        if (index !== -1) {
+          state.products[index] = action.payload;
+        }
+        if (state.currentProduct?.id === action.payload.id) {
+          state.currentProduct = action.payload;
+        }
+        const filteredIndex = state.filteredProducts.findIndex(
+          (product) => product.id === action.payload.id,
+        );
+        if (filteredIndex !== -1) {
+          state.filteredProducts[filteredIndex] = action.payload;
+        }
+        state.updateError = null;
+      })
+      .addCase(updateProduct.rejected, (state, action) => {
+        state.updatingProduct = false;
+        state.updateError = action.payload || { message: 'Unknown error' };
+      })
+      .addCase(patchProduct.pending, (state) => {
+        state.updatingProduct = true;
+        state.updateError = null;
+      })
+      .addCase(patchProduct.fulfilled, (state, action) => {
+        state.updatingProduct = false;
+        const index = state.products.findIndex(
+          (product) => product.id === action.payload.id,
+        );
+        if (index !== -1) {
+          state.products[index] = action.payload;
+        }
+        if (state.currentProduct?.id === action.payload.id) {
+          state.currentProduct = action.payload;
+        }
+        const filteredIndex = state.filteredProducts.findIndex(
+          (product) => product.id === action.payload.id,
+        );
+        if (filteredIndex !== -1) {
+          state.filteredProducts[filteredIndex] = action.payload;
+        }
+        state.updateError = null;
+      })
+      .addCase(patchProduct.rejected, (state, action) => {
+        state.updatingProduct = false;
+        state.updateError = action.payload || { message: 'Unknown error' };
       });
   },
 });
@@ -182,6 +276,7 @@ export const {
   clearError,
   clearProductError,
   clearCreateError,
+  clearUpdateError,
   setSelectedCategory,
   clearFilter,
 } = productSlice.actions;

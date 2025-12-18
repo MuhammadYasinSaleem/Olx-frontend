@@ -5,7 +5,13 @@ import {
   registerUser,
 } from './auth.service';
 import { createOrder, getOrderById, getOrders } from './order.service';
-import { createProduct, getProductById, getProducts } from './product.service';
+import {
+  createProduct,
+  getProductById,
+  getProducts,
+  patchProduct,
+  updateProduct,
+} from './product.service';
 
 export {
   createOrder,
@@ -17,5 +23,7 @@ export {
   getUserProfile,
   loginUser,
   logoutUser,
+  patchProduct,
   registerUser,
+  updateProduct,
 };

@@ -43,3 +43,74 @@ export async function createProduct(
 
   return res.data.data;
 }
+
+export async function updateProduct(
+  id: number,
+  productData: Types.ProductUpdateRequest,
+): Promise<Types.Product> {
+  const formData = new FormData();
+
+  formData.append('product_name', productData.product_name);
+  formData.append('price', productData.price);
+  formData.append('category', productData.category.toString());
+
+  if (productData.quantity !== undefined) {
+    formData.append('quantity', productData.quantity.toString());
+  }
+  if (productData.description) {
+    formData.append('description', productData.description);
+  }
+  if (productData.product_img) {
+    formData.append('product_img', productData.product_img);
+  }
+
+  const res = await apiClient.put<Types.UpdateProductApiResponse>(
+    `products/${id}/`,
+    formData,
+    {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    },
+  );
+
+  return res.data.data;
+}
+
+export async function patchProduct(
+  id: number,
+  productData: Types.ProductPatchRequest,
+): Promise<Types.Product> {
+  const formData = new FormData();
+
+  if (productData.product_name) {
+    formData.append('product_name', productData.product_name);
+  }
+  if (productData.price) {
+    formData.append('price', productData.price);
+  }
+  if (productData.category !== undefined) {
+    formData.append('category', productData.category.toString());
+  }
+  if (productData.quantity !== undefined) {
+    formData.append('quantity', productData.quantity.toString());
+  }
+  if (productData.description !== undefined) {
+    formData.append('description', productData.description);
+  }
+  if (productData.product_img) {
+    formData.append('product_img', productData.product_img);
+  }
+
+  const res = await apiClient.patch<Types.UpdateProductApiResponse>(
+    `products/${id}/`,
+    formData,
+    {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    },
+  );
+
+  return res.data.data;
+}
