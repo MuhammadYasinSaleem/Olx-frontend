@@ -28,3 +28,20 @@ export async function getUserProfile(): Promise<Types.UserResponse> {
   const res = await apiClient.get<Types.UserResponse>('user/profile/');
   return res.data;
 }
+
+export async function updateUserProfile(
+  payload: Types.UserProfileUpdateRequest,
+): Promise<Types.UserResponse> {
+  const res = await apiClient.put<Types.UserResponse>('user/profile/', payload);
+  return res.data;
+}
+
+export async function patchUserProfile(
+  payload: Types.PatchedUserProfileUpdateRequest,
+): Promise<Types.UserResponse> {
+  const res = await apiClient.patch<Types.UserResponse>(
+    'user/profile/',
+    payload,
+  );
+  return res.data;
+}

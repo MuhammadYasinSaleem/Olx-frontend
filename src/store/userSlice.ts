@@ -5,7 +5,9 @@ import {
   getUserProfile as getUserProfileService,
   loginUser as loginUserService,
   logoutUser as logoutUserService,
+  patchUserProfile as patchUserProfileService,
   registerUser as registerUserService,
+  updateUserProfile as updateUserProfileService,
 } from '@services';
 
 import { clearCart } from './cartSlice';
@@ -71,6 +73,38 @@ export const fetchUserProfile = createAsyncThunk<
   } catch (error: any) {
     return rejectWithValue({
       message: error?.message || 'Failed to fetch profile',
+      status: error?.status,
+    });
+  }
+});
+
+export const updateUserProfile = createAsyncThunk<
+  Types.UserResponse,
+  Types.UserProfileUpdateRequest,
+  { rejectValue: { message: string; status?: number } }
+>('user/updateProfile', async (payload, { rejectWithValue }) => {
+  try {
+    const user = await updateUserProfileService(payload);
+    return user;
+  } catch (error: any) {
+    return rejectWithValue({
+      message: error?.message || 'Failed to update profile',
+      status: error?.status,
+    });
+  }
+});
+
+export const patchUserProfile = createAsyncThunk<
+  Types.UserResponse,
+  Types.PatchedUserProfileUpdateRequest,
+  { rejectValue: { message: string; status?: number } }
+>('user/patchProfile', async (payload, { rejectWithValue }) => {
+  try {
+    const user = await patchUserProfileService(payload);
+    return user;
+  } catch (error: any) {
+    return rejectWithValue({
+      message: error?.message || 'Failed to update profile',
       status: error?.status,
     });
   }
@@ -157,6 +191,36 @@ const userSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchUserProfile.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload || { message: 'Unknown error' };
+      });
+
+    builder
+      .addCase(updateUserProfile.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(updateUserProfile.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user = action.payload;
+        state.error = null;
+      })
+      .addCase(updateUserProfile.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload || { message: 'Unknown error' };
+      });
+
+    builder
+      .addCase(patchUserProfile.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(patchUserProfile.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user = action.payload;
+        state.error = null;
+      })
+      .addCase(patchUserProfile.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload || { message: 'Unknown error' };
       })

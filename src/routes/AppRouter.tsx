@@ -6,6 +6,8 @@ import {
   AuthPage,
   CartPage,
   CreateProductPage,
+  EditProductPage,
+  EditProfilePage,
   MyProductsPage,
   OrdersPage,
   ProductDetailPage,
@@ -52,6 +54,15 @@ export const AppRoutes: React.FC = () => (
         }
       />
 
+      <Route
+        path={ROUTES.EDIT_PRODUCT}
+        element={
+          <ProtectedRoute>
+            <EditProductPage />
+          </ProtectedRoute>
+        }
+      />
+
       <Route path={ROUTES.CART} element={<CartPage />} />
 
       <Route path={ROUTES.ORDERS} element={<OrdersPage />} />
@@ -61,6 +72,15 @@ export const AppRoutes: React.FC = () => (
         element={
           <ProtectedRoute>
             <ProfilePage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path={ROUTES.EDIT_PROFILE}
+        element={
+          <ProtectedRoute>
+            <EditProfilePage />
           </ProtectedRoute>
         }
       />

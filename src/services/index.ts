@@ -2,7 +2,9 @@ import {
   getUserProfile,
   loginUser,
   logoutUser,
+  patchUserProfile,
   registerUser,
+  updateUserProfile,
 } from './auth.service';
 import { createOrder, getOrderById, getOrders } from './order.service';
 import {
@@ -24,6 +26,8 @@ export {
   loginUser,
   logoutUser,
   patchProduct,
+  patchUserProfile,
   registerUser,
   updateProduct,
+  updateUserProfile,
 };

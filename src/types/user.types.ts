@@ -18,3 +18,13 @@ export type UserResponse = {
   phone_no?: string;
   address?: string;
 };
+
+export type UserProfileUpdateRequest = {
+  email?: string;
+  first_name?: string;
+  last_name?: string;
+  phone_no?: string;
+  address?: string;
+};
+
+export type PatchedUserProfileUpdateRequest = Partial<UserProfileUpdateRequest>;

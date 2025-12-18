@@ -18,7 +18,7 @@ export const ProfilePage = () => {
       if (fetchUserProfile.rejected.match(result)) {
         toast.error(result.payload?.message || 'Failed to load profile');
         if (result.payload?.status === 403 || result.payload?.status === 401) {
-          navigate('/auth');
+          navigate('/');
         }
       }
     };
@@ -27,7 +27,7 @@ export const ProfilePage = () => {
   }, [dispatch, navigate]);
 
   if (!user && !loading) {
-    navigate('/auth');
+    navigate('/');
     return null;
   }
 
@@ -92,9 +92,7 @@ export const ProfilePage = () => {
               <Button
                 variant="outline"
                 className="bg-white text-blue-500 hover:bg-blue-50 border-white"
-                onClick={() => {
-                  toast('Edit profile functionality coming soon!');
-                }}
+                onClick={() => navigate('/profile/edit')}
               >
                 <Edit2 size={16} className="mr-2" />
                 Edit Profile

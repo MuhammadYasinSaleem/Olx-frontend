@@ -41,7 +41,9 @@ export {
   fetchUserProfile,
   loginUser,
   logoutUser,
+  patchUserProfile,
   registerUser,
+  updateUserProfile,
 } from './userSlice';
 
 export const clearUserSession = () => (dispatch: any) => {

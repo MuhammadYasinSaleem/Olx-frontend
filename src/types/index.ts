@@ -25,7 +25,12 @@ import type {
   ProductUpdateRequest,
   UpdateProductApiResponse,
 } from './product.types';
-import type { UserRequest, UserResponse } from './user.types';
+import type {
+  PatchedUserProfileUpdateRequest,
+  UserProfileUpdateRequest,
+  UserRequest,
+  UserResponse,
+} from './user.types';
 
 export type {
   AddToCartPayload,
@@ -40,6 +45,7 @@ export type {
   OrdersApiResponse,
   OrdersResponse,
   OrderState,
+  PatchedUserProfileUpdateRequest,
   Product,
   ProductApiResponse,
   ProductPatchRequest,
@@ -49,6 +55,7 @@ export type {
   ProductUpdateRequest,
   UpdateProductApiResponse,
   UpdateQuantityPayload,
+  UserProfileUpdateRequest,
   UserRequest,
   UserResponse,
 };

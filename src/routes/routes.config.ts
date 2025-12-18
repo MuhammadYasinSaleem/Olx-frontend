@@ -11,6 +11,7 @@ export const ROUTES = {
   ORDERS: '/orders',
   SETTINGS: '/settings',
   PROFILE: '/profile',
+  EDIT_PROFILE: '/profile/edit',
   NOT_FOUND: '*',
 } as const;
 
