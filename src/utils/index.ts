@@ -1,3 +1,4 @@
+export { canEditProduct } from './product.utils';
 export {
   isValidForm,
   type SigninFormData,

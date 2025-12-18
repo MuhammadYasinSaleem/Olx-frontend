@@ -18,9 +18,12 @@ import type {
   CreateProductApiResponse,
   Product,
   ProductApiResponse,
+  ProductPatchRequest,
   ProductRequest,
   ProductsApiResponse,
   ProductsResponse,
+  ProductUpdateRequest,
+  UpdateProductApiResponse,
 } from './product.types';
 import type { UserRequest, UserResponse } from './user.types';
 
@@ -39,9 +42,12 @@ export type {
   OrderState,
   Product,
   ProductApiResponse,
+  ProductPatchRequest,
   ProductRequest,
   ProductsApiResponse,
   ProductsResponse,
+  ProductUpdateRequest,
+  UpdateProductApiResponse,
   UpdateQuantityPayload,
   UserRequest,
   UserResponse,

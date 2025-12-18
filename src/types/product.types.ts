@@ -8,6 +8,7 @@ export type Product = {
   product_img_url: string | null;
   created_at: string;
   user_name: string;
+  user_id?: number;
   category: number;
   category_name: string;
 };
@@ -19,6 +20,24 @@ export type ProductRequest = {
   price: string;
   product_img?: File;
   category: number;
+};
+
+export type ProductUpdateRequest = {
+  product_name: string;
+  quantity?: number;
+  description?: string;
+  price: string;
+  product_img?: File;
+  category: number;
+};
+
+export type ProductPatchRequest = {
+  product_name?: string;
+  quantity?: number;
+  description?: string;
+  price?: string;
+  product_img?: File;
+  category?: number;
 };
 
 export type ProductsApiResponse = {
@@ -38,6 +57,13 @@ export type CreateProductApiResponse = {
   message: string;
   data: Product;
   errors: any;
+};
+
+export type UpdateProductApiResponse = {
+  success: boolean;
+  message: string;
+  data: Product;
+  errors?: any;
 };
 
 export type ProductsResponse = Product[];

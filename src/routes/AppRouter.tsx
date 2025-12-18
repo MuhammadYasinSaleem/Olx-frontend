@@ -7,6 +7,7 @@ import {
   CartPage,
   CreateProductPage,
   HomePage,
+  MyProductsPage,
   OrdersPage,
   ProductDetailPage,
   ProductsPage,
@@ -40,6 +41,15 @@ export const AppRoutes: React.FC = () => (
         element={
           <ProtectedRoute>
             <CreateProductPage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path={ROUTES.MY_PRODUCTS}
+        element={
+          <ProtectedRoute>
+            <MyProductsPage />
           </ProtectedRoute>
         }
       />
