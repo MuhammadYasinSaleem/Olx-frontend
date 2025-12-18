@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from 'react';
 import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Edit3, Plus } from 'lucide-react';
 
 import { Button } from '@components/atoms';
@@ -10,6 +10,7 @@ import { fetchProducts, useAppDispatch, useAppSelector } from '@store';
 
 export const MyProductsPage = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state.user);
   const { products, loading, error } = useAppSelector(
@@ -21,13 +22,18 @@ export const MyProductsPage = () => {
       return [];
     }
 
-    return products.filter((product) => canEditProduct(product, user));
+    const filteredProducts = products.filter((product) => {
+      const canEdit = canEditProduct(product, user);
+      return canEdit;
+    });
+
+    return filteredProducts;
   }, [products, user]);
 
   useEffect(() => {
     if (!user) {
       toast.error('Please sign in to view your products');
-      navigate('/auth');
+      navigate('/');
       return;
     }
 
@@ -39,10 +45,13 @@ export const MyProductsPage = () => {
       }
     };
 
-    if (products.length === 0) {
+    const shouldRefresh =
+      products.length === 0 || (location.state as any)?.refreshProducts;
+
+    if (shouldRefresh) {
       loadProducts();
     }
-  }, [dispatch, navigate, user, products.length]);
+  }, [dispatch, navigate, user, products.length, location.state]);
 
   const handleEditProduct = (productId: number) => {
     navigate(`/products/${productId}/edit`);
