@@ -1,4 +1,3 @@
-// Helper function to clear both user session and cart
 import { clearCart } from './cartSlice';
 import { clearUser } from './userSlice';
 

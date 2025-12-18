@@ -40,12 +40,6 @@ export const OrdersPage = () => {
     }
   }, [user, navigate, dispatch, cartItems.length]);
 
-  useEffect(() => {
-    if (orders.length > 0) {
-      toast.success('Orders received:');
-    }
-  }, [orders]);
-
   const handlePlaceOrder = async () => {
     if (!shippingAddress.trim()) {
       toast.error('Please enter a shipping address');
