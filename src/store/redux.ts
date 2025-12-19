@@ -17,22 +17,21 @@ import orderReducer from './orderSlice';
 import productReducer from './productSlice';
 import userReducer from './userSlice';
 
-const persistConfig = {
-  key: 'root',
+const userPersistConfig = {
+  key: 'user',
   version: 1,
   storage,
-  whitelist: ['user', 'cart'],
 };
 
-const persistedUserReducer = persistReducer(
-  { ...persistConfig, key: 'user' },
-  userReducer,
-);
+const cartPersistConfig = {
+  key: 'cart',
+  version: 1,
+  storage,
+};
 
-const persistedCartReducer = persistReducer(
-  { ...persistConfig, key: 'cart' },
-  cartReducer,
-);
+const persistedUserReducer = persistReducer(userPersistConfig, userReducer);
+
+const persistedCartReducer = persistReducer(cartPersistConfig, cartReducer);
 
 export const store = configureStore({
   reducer: {
