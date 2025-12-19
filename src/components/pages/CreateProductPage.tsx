@@ -12,6 +12,8 @@ import {
   useAppSelector,
 } from '@store';
 
+import { useValidation } from '../../hooks/useValidation';
+
 export const CreateProductPage = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -19,6 +21,7 @@ export const CreateProductPage = () => {
   const { products, creatingProduct, createError } = useAppSelector(
     (state) => state.products,
   );
+  const { validateProductForm, validateImageFile } = useValidation();
 
   const [formData, setFormData] = useState({
     product_name: '',
@@ -69,13 +72,9 @@ export const CreateProductPage = () => {
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      if (!file.type.startsWith('image/')) {
-        toast.error('Please select an image file');
-        return;
-      }
+      const validationResult = validateImageFile(file);
 
-      if (file.size > 5 * 1024 * 1024) {
-        toast.error('Image size must be less than 5MB');
+      if (!validationResult.isValid) {
         return;
       }
 
@@ -97,44 +96,22 @@ export const CreateProductPage = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!formData.product_name.trim()) {
-      toast.error('Product name is required');
-      return;
-    }
+    const validationResult = validateProductForm(formData);
 
-    if (!formData.price.trim()) {
-      toast.error('Price is required');
+    if (!validationResult.isValid) {
       return;
-    }
-
-    if (!formData.category) {
-      toast.error('Category is required');
-      return;
-    }
-
-    const price = parseFloat(formData.price);
-    if (isNaN(price) || price <= 0) {
-      toast.error('Please enter a valid price');
-      return;
-    }
-
-    let quantity: number | undefined;
-    if (formData.quantity.trim()) {
-      quantity = parseInt(formData.quantity);
-      if (isNaN(quantity) || quantity < 0) {
-        toast.error('Please enter a valid quantity');
-        return;
-      }
     }
 
     const productData = {
       product_name: formData.product_name.trim(),
       price: formData.price,
       category: parseInt(formData.category),
-      ...(quantity !== undefined && { quantity }),
-      ...(formData.description.trim() && {
-        description: formData.description.trim(),
-      }),
+      ...(formData.quantity &&
+        formData.quantity.trim() && { quantity: parseInt(formData.quantity) }),
+      ...(formData.description &&
+        formData.description.trim() && {
+          description: formData.description.trim(),
+        }),
       ...(imageFile && { product_img: imageFile }),
     };
 
@@ -147,8 +124,10 @@ export const CreateProductPage = () => {
       } else if (createProduct.rejected.match(result)) {
         toast.error(result.payload?.message || 'Failed to create product');
       }
-    } catch (_error) {
-      toast.error('An unexpected error occurred');
+    } catch (error) {
+      toast.error(
+        error instanceof Error ? error.message : 'An unexpected error occurred',
+      );
     }
   };
 

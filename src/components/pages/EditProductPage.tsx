@@ -13,11 +13,14 @@ import {
   useAppSelector,
 } from '@store';
 
+import { useValidation } from '../../hooks/useValidation';
+
 export const EditProductPage: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { id } = useParams<{ id: string }>();
   const { user } = useAppSelector((state) => state.user);
+  const { validateProductForm, validateImageFile } = useValidation();
   const { products, currentProduct, updatingProduct, updateError, loading } =
     useAppSelector((state) => state.products);
 
@@ -114,13 +117,9 @@ export const EditProductPage: React.FC = () => {
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      if (!file.type.startsWith('image/')) {
-        toast.error('Please select an image file');
-        return;
-      }
+      const validationResult = validateImageFile(file);
 
-      if (file.size > 5 * 1024 * 1024) {
-        toast.error('Image size must be less than 5MB');
+      if (!validationResult.isValid) {
         return;
       }
 
@@ -147,44 +146,22 @@ export const EditProductPage: React.FC = () => {
       return;
     }
 
-    if (!formData.product_name.trim()) {
-      toast.error('Product name is required');
-      return;
-    }
+    const validationResult = validateProductForm(formData);
 
-    if (!formData.price.trim()) {
-      toast.error('Price is required');
+    if (!validationResult.isValid) {
       return;
-    }
-
-    if (!formData.category) {
-      toast.error('Category is required');
-      return;
-    }
-
-    const price = parseFloat(formData.price);
-    if (isNaN(price) || price <= 0) {
-      toast.error('Please enter a valid price');
-      return;
-    }
-
-    let quantity: number | undefined;
-    if (formData.quantity.trim()) {
-      quantity = parseInt(formData.quantity);
-      if (isNaN(quantity) || quantity < 0) {
-        toast.error('Please enter a valid quantity');
-        return;
-      }
     }
 
     const productData = {
       product_name: formData.product_name.trim(),
       price: formData.price,
       category: parseInt(formData.category),
-      ...(quantity !== undefined && { quantity }),
-      ...(formData.description.trim() && {
-        description: formData.description.trim(),
-      }),
+      ...(formData.quantity &&
+        formData.quantity.trim() && { quantity: parseInt(formData.quantity) }),
+      ...(formData.description &&
+        formData.description.trim() && {
+          description: formData.description.trim(),
+        }),
       ...(imageFile && { product_img: imageFile }),
     };
 
