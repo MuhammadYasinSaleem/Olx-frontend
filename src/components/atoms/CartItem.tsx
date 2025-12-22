@@ -4,7 +4,7 @@ import type * as Types from '@types';
 
 import { Button } from './Button';
 
-export interface CartItemProps {
+interface CartItemProps {
   item: Types.CartItem;
   onUpdateQuantity: (_id: number, _quantity: number) => void;
   onRemoveItem: (_id: number) => void;

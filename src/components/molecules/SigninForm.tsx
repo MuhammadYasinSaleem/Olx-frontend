@@ -4,7 +4,7 @@ import { Eye, EyeOff } from 'lucide-react';
 import { Button, Input } from '@components/atoms';
 import { isValidForm, validateSigninForm, type ValidationErrors } from '@utils';
 
-export interface SigninFormProps {
+interface SigninFormProps {
   onSubmit: (_data: { username: string; password: string }) => void;
   loading?: boolean;
   error?: string | null;

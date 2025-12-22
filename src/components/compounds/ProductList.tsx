@@ -1,7 +1,7 @@
 import { ProductCard } from '@components/molecules';
 import type * as Types from '@types';
 
-export interface ProductListProps {
+interface ProductListProps {
   products: Types.Product[];
   loading?: boolean;
   error?: string | null;

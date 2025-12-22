@@ -7,7 +7,7 @@ import { Button } from '@components/atoms';
 import type * as Types from '@types';
 import { addToCart, useAppDispatch } from '@store';
 
-export interface ProductCardProps {
+interface ProductCardProps {
   product: Types.Product;
 }
 

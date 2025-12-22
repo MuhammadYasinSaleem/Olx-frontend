@@ -5,7 +5,7 @@ import { Button, Checkbox, Input } from '@components/atoms';
 import { isValidForm, validateSignupForm, type ValidationErrors } from '@utils';
 import type * as Types from '@types';
 
-export interface SignupFormProps {
+interface SignupFormProps {
   onSubmit: (_data: Types.UserRequest) => void;
   loading?: boolean;
   error?: string | null;

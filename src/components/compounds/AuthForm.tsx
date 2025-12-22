@@ -5,7 +5,7 @@ import type * as Types from '@types';
 
 export type AuthFormType = 'signin' | 'signup';
 
-export interface AuthFormProps {
+interface AuthFormProps {
   type: AuthFormType;
   onSubmit: (
     _data: Types.UserRequest | { username: string; password: string },
