@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Root application component that wires routes and global UI providers.
+ * @module App
+ */
+
 import { Toaster } from 'react-hot-toast';
 import { AppRoutes } from '@routes';
 

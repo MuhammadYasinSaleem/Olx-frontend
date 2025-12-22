@@ -1,12 +1,36 @@
+/**
+ * @fileoverview Product list component displaying products in a responsive grid layout.
+ * @module components/compounds/ProductList
+ */
+
 import { ProductCard } from '@components/molecules';
 import type * as Types from '@types';
 
+/**
+ * Props interface for ProductList component.
+ */
 interface ProductListProps {
   products: Types.Product[];
   loading?: boolean;
   error?: string | null;
 }
 
+/**
+ * Product list component for displaying multiple products in a grid.
+ *
+ * Features:
+ * - Responsive grid layout (1-4 columns)
+ * - Loading state display
+ * - Error state handling
+ * - Empty state message
+ * - Renders ProductCard for each product
+ *
+ * @param {Object} props - Component props
+ * @param {Types.Product[]} props.products - Array of products to display
+ * @param {boolean} [props.loading] - Shows loading message when true
+ * @param {string|null} [props.error] - Error message to display
+ * @returns {JSX.Element} ProductList component
+ */
 export const ProductList = ({ products, loading, error }: ProductListProps) => {
   if (loading) {
     return (

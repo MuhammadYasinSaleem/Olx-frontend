@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Validation service providing reusable validators for forms and files.
+ * @module utils/validation.service
+ */
+
 import { MAX_IMAGE_SIZE } from '@constants';
 
 export interface ValidationResult {

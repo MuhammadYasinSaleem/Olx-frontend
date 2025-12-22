@@ -1,11 +1,36 @@
+/**
+ * @fileoverview Reusable input component with label, error state, and forwarded ref.
+ * @module components/atoms/Input
+ */
+
 import { forwardRef, InputHTMLAttributes } from 'react';
 
+/**
+ * Props interface for Input component.
+ */
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   error?: string;
   required?: boolean;
 }
 
+/**
+ * Input component with label and error display support.
+ *
+ * Features:
+ * - Optional label with required indicator
+ * - Error message display
+ * - Forwarded ref for form libraries
+ * - Extends native input attributes
+ *
+ * @param {Object} props - Component props
+ * @param {string} [props.label] - Input label text
+ * @param {string} [props.error] - Error message to display
+ * @param {boolean} [props.required] - Shows required indicator when true
+ * @param {string} [props.className=''] - Additional CSS classes
+ * @param {React.Ref<HTMLInputElement>} ref - Forwarded ref
+ * @returns {JSX.Element} Input component
+ */
 export const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ label, error, required, className = '', ...props }, ref) => (
     <div className="w-full">

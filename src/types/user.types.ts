@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Types for user requests, responses, and profile update shapes.
+ * @module types/user.types
+ */
+
 export type UserRequest = {
   username: string;
   email?: string;

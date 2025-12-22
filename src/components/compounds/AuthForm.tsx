@@ -1,10 +1,21 @@
+/**
+ * @fileoverview Authentication form wrapper component supporting both signin and signup modes.
+ * @module components/compounds/AuthForm
+ */
+
 import { X } from 'lucide-react';
 
 import { SigninForm, SignupForm } from '@components/molecules';
 import type * as Types from '@types';
 
+/**
+ * Type definition for authentication form mode.
+ */
 export type AuthFormType = 'signin' | 'signup';
 
+/**
+ * Props interface for AuthForm component.
+ */
 interface AuthFormProps {
   type: AuthFormType;
   onSubmit: (
@@ -17,6 +28,26 @@ interface AuthFormProps {
   title?: string;
 }
 
+/**
+ * Authentication form wrapper component handling both signin and signup flows.
+ *
+ * Features:
+ * - Switches between signin and signup forms
+ * - Optional close button for modal usage
+ * - Form toggle link between modes
+ * - Customizable title
+ * - Loading and error state handling
+ *
+ * @param {Object} props - Component props
+ * @param {AuthFormType} props.type - Form type ('signin' or 'signup')
+ * @param {Function} props.onSubmit - Callback when form is submitted
+ * @param {boolean} [props.loading] - Loading state for form
+ * @param {string|null} [props.error] - Error message to display
+ * @param {Function} [props.onToggleForm] - Callback to toggle between form types
+ * @param {Function} [props.onClose] - Callback when close button is clicked
+ * @param {string} [props.title] - Optional form title
+ * @returns {JSX.Element} AuthForm component
+ */
 export const AuthForm = ({
   type,
   onSubmit,

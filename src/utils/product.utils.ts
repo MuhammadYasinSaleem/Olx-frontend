@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Utility functions related to product operations.
+ * @module utils/product.utils
+ */
+
 import type * as Types from '@types';
 
 export const canEditProduct = (

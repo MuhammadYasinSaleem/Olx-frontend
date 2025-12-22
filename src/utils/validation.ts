@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Lightweight validation helpers for auth and signup forms.
+ * @module utils/validation
+ */
+
 export interface ValidationErrors {
   [key: string]: string;
 }

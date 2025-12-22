@@ -1,3 +1,8 @@
+/**
+ * @fileoverview My products page displaying user's own products with management options.
+ * @module components/pages/MyProductsPage
+ */
+
 import { useEffect, useMemo } from 'react';
 import toast from 'react-hot-toast';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -8,6 +13,20 @@ import { ProductCard } from '@components/molecules';
 import { canEditProduct } from '@utils';
 import { fetchProducts, useAppDispatch, useAppSelector } from '@store';
 
+/**
+ * My products page component for managing user's own products.
+ *
+ * Features:
+ * - Display products owned by current user
+ * - Edit button for each product
+ * - Create new product navigation
+ * - Product ownership verification
+ * - Loading and error state handling
+ * - Authentication guard
+ * - Refresh on navigation from edit/create
+ *
+ * @returns {JSX.Element} MyProductsPage component
+ */
 export const MyProductsPage = () => {
   const navigate = useNavigate();
   const location = useLocation();

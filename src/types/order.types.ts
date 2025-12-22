@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Types for orders, order items, and order-related API responses.
+ * @module types/order.types
+ */
+
 export type OrderProductData = {
   product_id: number;
   quantity: number;
