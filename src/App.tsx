@@ -1,15 +1,18 @@
+/**
+ * @fileoverview Root application component that wires routes and global UI providers.
+ * @module App
+ */
+
 import { Toaster } from 'react-hot-toast';
 import { AppRoutes } from '@routes';
 
 import './App.css';
 
-function App() {
-  return (
-    <>
-      <AppRoutes />
-      <Toaster position="top-center" />
-    </>
-  );
-}
+const App = () => (
+  <>
+    <AppRoutes />
+    <Toaster position="top-center" />
+  </>
+);
 
 export default App;

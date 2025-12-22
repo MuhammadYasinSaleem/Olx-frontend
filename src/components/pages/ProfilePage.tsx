@@ -1,3 +1,8 @@
+/**
+ * @fileoverview User profile page displaying account information.
+ * @module components/pages/ProfilePage
+ */
+
 import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
@@ -6,6 +11,19 @@ import { ArrowLeft, Edit2, Mail, MapPin, Phone, User } from 'lucide-react';
 import { Button } from '@components/atoms';
 import { fetchUserProfile, useAppDispatch, useAppSelector } from '@store';
 
+/**
+ * Profile page component for viewing user account information.
+ *
+ * Features:
+ * - Display user profile details (name, email, phone, address)
+ * - Edit profile navigation
+ * - Profile avatar/icon display
+ * - Loading and error state handling
+ * - Auto-fetch profile on mount
+ * - Authentication guard
+ *
+ * @returns {JSX.Element|null} ProfilePage component or null if redirecting
+ */
 export const ProfilePage = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -217,3 +235,5 @@ export const ProfilePage = () => {
     </div>
   );
 };
+
+export default ProfilePage;

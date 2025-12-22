@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Authentication page handling user signin and signup flows.
+ * @module components/pages/AuthPage
+ */
+
 import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -12,6 +17,19 @@ import {
   useAppSelector,
 } from '@store';
 
+/**
+ * Authentication page component for user signin and signup.
+ *
+ * Features:
+ * - Dynamic form switching between signin and signup
+ * - URL-based form type detection (/signin vs /signup)
+ * - Redux integration for authentication actions
+ * - Toast notifications for success/error states
+ * - Auto-redirect after successful authentication
+ * - Redirect logged-in users away from auth pages
+ *
+ * @returns {JSX.Element} AuthPage component
+ */
 export const AuthPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -74,3 +92,5 @@ export const AuthPage = () => {
     </div>
   );
 };
+
+export default AuthPage;

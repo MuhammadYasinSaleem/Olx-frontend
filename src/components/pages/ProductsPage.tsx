@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Products listing page with filtering and pagination.
+ * @module components/pages/ProductsPage
+ */
+
 import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
@@ -15,6 +20,19 @@ import {
 
 import { ROUTES } from '../../routes/routes.config';
 
+/**
+ * Products page component for browsing and filtering products.
+ *
+ * Features:
+ * - Product grid display with pagination
+ * - Category filter sidebar
+ * - Create product button (for authenticated users)
+ * - Loading and error state handling
+ * - Server-side pagination support
+ * - Filter state management via Redux
+ *
+ * @returns {JSX.Element} ProductsPage component
+ */
 export const ProductsPage = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -104,3 +122,5 @@ export const ProductsPage = () => {
     </div>
   );
 };
+
+export default ProductsPage;

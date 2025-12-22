@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Redux slice for user authentication and profile state management.
+ * @module store/userSlice
+ */
+
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import type * as Types from '@types';
@@ -12,6 +17,12 @@ import {
 
 import { clearCart } from './cartSlice';
 
+/**
+ * Async thunk for user registration.
+ *
+ * @param {Types.UserRequest} payload - User registration data
+ * @returns {Promise<Types.UserResponse>} Created user data
+ */
 export const registerUser = createAsyncThunk<
   Types.UserResponse,
   Types.UserRequest,
@@ -28,6 +39,12 @@ export const registerUser = createAsyncThunk<
   }
 });
 
+/**
+ * Async thunk for user login.
+ *
+ * @param {{ username: string, password: string }} payload - Login credentials
+ * @returns {Promise<Types.UserResponse>} Authenticated user data
+ */
 export const loginUser = createAsyncThunk<
   Types.UserResponse,
   { username: string; password: string },
@@ -44,6 +61,12 @@ export const loginUser = createAsyncThunk<
   }
 });
 
+/**
+ * Async thunk for user logout.
+ * Also clears the cart on successful logout.
+ *
+ * @returns {Promise<void>}
+ */
 export const logoutUser = createAsyncThunk<
   void,
   void,

@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Shopping cart page displaying cart items and checkout functionality.
+ * @module components/pages/CartPage
+ */
+
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, ShoppingCart } from 'lucide-react';
@@ -11,6 +16,20 @@ import {
   useAppSelector,
 } from '@store';
 
+/**
+ * Cart page component for managing shopping cart items.
+ *
+ * Features:
+ * - Display cart items with quantity controls
+ * - Update item quantities
+ * - Remove individual items
+ * - Clear entire cart
+ * - Order summary with total price
+ * - Checkout navigation (requires authentication)
+ * - Empty cart state handling
+ *
+ * @returns {JSX.Element} CartPage component
+ */
 export const CartPage = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -179,3 +198,5 @@ export const CartPage = () => {
     </div>
   );
 };
+
+export default CartPage;

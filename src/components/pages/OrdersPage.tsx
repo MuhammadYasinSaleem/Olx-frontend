@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Orders page for viewing order history and placing new orders.
+ * @module components/pages/OrdersPage
+ */
+
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
@@ -13,6 +18,20 @@ import {
   useAppSelector,
 } from '@store';
 
+/**
+ * Orders page component for order management and checkout.
+ *
+ * Features:
+ * - View order history with details
+ * - Place new orders from cart
+ * - Shipping address input for checkout
+ * - Order status display
+ * - Order items breakdown
+ * - Loading and error state handling
+ * - Authentication guard
+ *
+ * @returns {JSX.Element} OrdersPage component
+ */
 export const OrdersPage = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -373,3 +392,5 @@ export const OrdersPage = () => {
     </div>
   );
 };
+
+export default OrdersPage;

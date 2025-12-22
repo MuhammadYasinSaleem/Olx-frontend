@@ -1,12 +1,33 @@
+/**
+ * @fileoverview Reusable checkbox component with optional label.
+ * @module components/atoms/Checkbox
+ */
+
 import { InputHTMLAttributes } from 'react';
 
-export interface CheckboxProps extends Omit<
+/**
+ * Props interface for Checkbox component.
+ */
+interface CheckboxProps extends Omit<
   InputHTMLAttributes<HTMLInputElement>,
   'type'
 > {
   label?: string;
 }
 
+/**
+ * Checkbox component with optional label text.
+ *
+ * Features:
+ * - Optional label with hover effect
+ * - Custom styling with focus ring
+ * - Extends native checkbox attributes
+ *
+ * @param {Object} props - Component props
+ * @param {string} [props.label] - Label text to display next to checkbox
+ * @param {string} [props.className=''] - Additional CSS classes
+ * @returns {JSX.Element} Checkbox component
+ */
 export const Checkbox = ({
   label,
   className = '',
@@ -26,3 +47,5 @@ export const Checkbox = ({
     )}
   </label>
 );
+
+export default Checkbox;

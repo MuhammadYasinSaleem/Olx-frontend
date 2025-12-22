@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Create product page with form for adding new products.
+ * @module components/pages/CreateProductPage
+ */
+
 import React, { useEffect, useMemo, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
@@ -14,6 +19,20 @@ import {
 
 import { useValidation } from '../../hooks/useValidation';
 
+/**
+ * Create product page component for adding new products.
+ *
+ * Features:
+ * - Product form with validation
+ * - Image upload with preview
+ * - Category selection from existing categories
+ * - Form validation with error messages
+ * - Loading state during submission
+ * - Auto-redirect after successful creation
+ * - Authentication guard
+ *
+ * @returns {JSX.Element} CreateProductPage component
+ */
 export const CreateProductPage = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -320,3 +339,5 @@ export const CreateProductPage = () => {
     </div>
   );
 };
+
+export default CreateProductPage;

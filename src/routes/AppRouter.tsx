@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Main application router defining all routes and their components.
+ * @module routes/AppRouter
+ */
+
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
@@ -18,6 +23,18 @@ import {
 import { ProtectedRoute } from './ProtectedRoute';
 import { ROUTES } from './routes.config';
 
+/**
+ * Application routes component defining the route structure.
+ *
+ * Features:
+ * - Public routes for authentication (signin/signup)
+ * - Layout wrapper for main content pages
+ * - Protected routes requiring authentication
+ * - 404 not found handling
+ * - Nested routing structure
+ *
+ * @returns {JSX.Element} AppRoutes component
+ */
 export const AppRoutes: React.FC = () => (
   <Routes>
     <Route path={ROUTES.SIGNIN} element={<AuthPage />} />
@@ -105,3 +122,5 @@ export const AppRoutes: React.FC = () => (
     />
   </Routes>
 );
+
+export default AppRoutes;

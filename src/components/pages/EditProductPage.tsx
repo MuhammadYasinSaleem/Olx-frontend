@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Edit product page with form for updating existing products.
+ * @module components/pages/EditProductPage
+ */
+
 import React, { useEffect, useMemo, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -15,6 +20,20 @@ import {
 
 import { useValidation } from '../../hooks/useValidation';
 
+/**
+ * Edit product page component for updating existing products.
+ *
+ * Features:
+ * - Pre-populated form with existing product data
+ * - Image upload with preview and existing image display
+ * - Category selection from existing categories
+ * - Form validation with error messages
+ * - Loading state during submission
+ * - Auto-redirect after successful update
+ * - Authentication and ownership verification
+ *
+ * @returns {JSX.Element} EditProductPage component
+ */
 export const EditProductPage: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -400,3 +419,5 @@ export const EditProductPage: React.FC = () => {
     </div>
   );
 };
+
+export default EditProductPage;

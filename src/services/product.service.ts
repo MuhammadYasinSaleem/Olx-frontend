@@ -1,30 +1,59 @@
+/**
+ * @fileoverview Product service functions for CRUD operations on products.
+ * @module services/product.service
+ */
+
 import type * as Types from '@types';
 
 import { apiClient } from './api.config';
 
-export async function getProducts(): Promise<Types.ProductsResponse> {
+/**
+ * Fetches all products from the API.
+ *
+ * @returns {Promise<Types.ProductsResponse>} Array of all products
+ */
+export const getProducts = async (): Promise<Types.ProductsResponse> => {
   const res = await apiClient.get<Types.ProductsApiResponse>('products/');
   return res.data.data.results;
-}
+};
 
-export async function getProductsPaginated(
+/**
+ * Fetches paginated products from the API.
+ *
+ * @param {number} [page=1] - Page number to fetch
+ * @param {number} [pageSize=5] - Number of items per page
+ * @returns {Promise<Types.PaginatedProductsResponse>} Paginated products data
+ */
+export const getProductsPaginated = async (
   page: number = 1,
   pageSize: number = 5,
-): Promise<Types.PaginatedProductsResponse> {
+): Promise<Types.PaginatedProductsResponse> => {
   const res = await apiClient.get<Types.ProductsApiResponse>(
     `products/?page=${page}&page_size=${pageSize}`,
   );
   return res.data.data;
-}
+};
 
-export async function getProductById(id: number): Promise<Types.Product> {
+/**
+ * Fetches a single product by ID.
+ *
+ * @param {number} id - Product ID
+ * @returns {Promise<Types.Product>} Product data
+ */
+export const getProductById = async (id: number): Promise<Types.Product> => {
   const res = await apiClient.get<Types.ProductApiResponse>(`products/${id}/`);
   return res.data.data;
-}
+};
 
-export async function createProduct(
+/**
+ * Creates a new product with optional image upload.
+ *
+ * @param {Types.ProductRequest} productData - Product creation data
+ * @returns {Promise<Types.Product>} Created product data
+ */
+export const createProduct = async (
   productData: Types.ProductRequest,
-): Promise<Types.Product> {
+): Promise<Types.Product> => {
   const formData = new FormData();
 
   formData.append('product_name', productData.product_name);
@@ -52,12 +81,12 @@ export async function createProduct(
   );
 
   return res.data.data;
-}
+};
 
-export async function updateProduct(
+export const updateProduct = async (
   id: number,
   productData: Types.ProductUpdateRequest,
-): Promise<Types.Product> {
+): Promise<Types.Product> => {
   const formData = new FormData();
 
   formData.append('product_name', productData.product_name);
@@ -85,12 +114,12 @@ export async function updateProduct(
   );
 
   return res.data.data;
-}
+};
 
-export async function patchProduct(
+export const patchProduct = async (
   id: number,
   productData: Types.ProductPatchRequest,
-): Promise<Types.Product> {
+): Promise<Types.Product> => {
   const formData = new FormData();
 
   if (productData.product_name) {
@@ -123,4 +152,4 @@ export async function patchProduct(
   );
 
   return res.data.data;
-}
+};

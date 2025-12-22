@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Sign up form component with comprehensive validation and user registration fields.
+ * @module components/molecules/SignupForm
+ */
+
 import { FormEvent, useState } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
 
@@ -5,12 +10,32 @@ import { Button, Checkbox, Input } from '@components/atoms';
 import { isValidForm, validateSignupForm, type ValidationErrors } from '@utils';
 import type * as Types from '@types';
 
-export interface SignupFormProps {
+/**
+ * Props interface for SignupForm component.
+ */
+interface SignupFormProps {
   onSubmit: (_data: Types.UserRequest) => void;
   loading?: boolean;
   error?: string | null;
 }
 
+/**
+ * Sign up form component for new user registration.
+ *
+ * Features:
+ * - User profile fields (username, email, name, phone, address)
+ * - Password field with visibility toggle
+ * - Terms and conditions agreement checkbox
+ * - Comprehensive form validation
+ * - Loading state handling
+ * - Server error display
+ *
+ * @param {Object} props - Component props
+ * @param {Function} props.onSubmit - Callback when form is submitted with valid data
+ * @param {boolean} [props.loading] - Shows loading state on submit button
+ * @param {string|null} [props.error] - Server error message to display
+ * @returns {JSX.Element} SignupForm component
+ */
 export const SignupForm = ({ onSubmit, loading, error }: SignupFormProps) => {
   const [showPassword, setShowPassword] = useState(false);
   const [agreedToTerms, setAgreedToTerms] = useState(false);
@@ -148,3 +173,5 @@ export const SignupForm = ({ onSubmit, loading, error }: SignupFormProps) => {
     </form>
   );
 };
+
+export default SignupForm;

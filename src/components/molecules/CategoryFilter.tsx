@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Category filter component for filtering products by category.
+ * @module components/molecules/CategoryFilter
+ */
+
 import { useMemo, useState } from 'react';
 import { ChevronDown, ChevronUp, Filter, X } from 'lucide-react';
 
@@ -9,10 +14,28 @@ import {
   useAppSelector,
 } from '@store';
 
+/**
+ * Props interface for CategoryFilter component.
+ */
 interface CategoryFilterProps {
   className?: string;
 }
 
+/**
+ * Category filter component for product filtering by category.
+ *
+ * Features:
+ * - Dynamic category list from products
+ * - Single category selection
+ * - Clear filter functionality
+ * - Collapsible on mobile devices
+ * - Active filter indicator
+ * - Product count per category
+ *
+ * @param {Object} props - Component props
+ * @param {string} [props.className=''] - Additional CSS classes
+ * @returns {JSX.Element|null} CategoryFilter component or null if no categories
+ */
 export const CategoryFilter = ({ className = '' }: CategoryFilterProps) => {
   const dispatch = useAppDispatch();
   const { products, selectedCategory, filteredProducts } = useAppSelector(
@@ -161,3 +184,5 @@ export const CategoryFilter = ({ className = '' }: CategoryFilterProps) => {
     </div>
   );
 };
+
+export default CategoryFilter;

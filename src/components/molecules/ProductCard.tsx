@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Product card component for displaying product information in grid layouts.
+ * @module components/molecules/ProductCard
+ */
+
 import React from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
@@ -7,10 +12,28 @@ import { Button } from '@components/atoms';
 import type * as Types from '@types';
 import { addToCart, useAppDispatch } from '@store';
 
-export interface ProductCardProps {
+/**
+ * Props interface for ProductCard component.
+ */
+interface ProductCardProps {
   product: Types.Product;
 }
 
+/**
+ * Product card component displaying product details with add to cart functionality.
+ *
+ * Features:
+ * - Product image with fallback placeholder
+ * - Category badge and stock quantity
+ * - Product name and description preview
+ * - Price display with add to cart button
+ * - Clickable card navigation to product detail
+ * - Responsive hover effects
+ *
+ * @param {Object} props - Component props
+ * @param {Types.Product} props.product - Product data to display
+ * @returns {JSX.Element} ProductCard component
+ */
 export const ProductCard = ({ product }: ProductCardProps) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -104,3 +127,5 @@ export const ProductCard = ({ product }: ProductCardProps) => {
     </div>
   );
 };
+
+export default ProductCard;

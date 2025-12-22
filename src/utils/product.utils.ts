@@ -1,9 +1,14 @@
+/**
+ * @fileoverview Utility functions related to product operations.
+ * @module utils/product.utils
+ */
+
 import type * as Types from '@types';
 
-export function canEditProduct(
+export const canEditProduct = (
   product: Types.Product | null,
   user: Types.UserResponse | null,
-): boolean {
+): boolean => {
   if (!product || !user) {
     return false;
   }
@@ -13,4 +18,4 @@ export function canEditProduct(
   }
 
   return product.user_name === user.username;
-}
+};

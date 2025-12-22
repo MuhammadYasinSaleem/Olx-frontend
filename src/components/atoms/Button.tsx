@@ -1,13 +1,39 @@
+/**
+ * @fileoverview Reusable button component with multiple variants and loading state.
+ * @module components/atoms/Button
+ */
+
 import { ButtonHTMLAttributes, ReactNode } from 'react';
 import { Loader2 } from 'lucide-react';
 
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+/**
+ * Props interface for Button component.
+ */
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
   variant?: 'primary' | 'secondary' | 'outline';
   loading?: boolean;
   fullWidth?: boolean;
 }
 
+/**
+ * Button component with customizable variants and loading state.
+ *
+ * Features:
+ * - Multiple style variants (primary, secondary, outline)
+ * - Loading state with spinner animation
+ * - Full width option
+ * - Extends native button attributes
+ *
+ * @param {Object} props - Component props
+ * @param {ReactNode} props.children - Button content
+ * @param {'primary' | 'secondary' | 'outline'} [props.variant='primary'] - Button style variant
+ * @param {boolean} [props.loading=false] - Shows loading spinner when true
+ * @param {boolean} [props.fullWidth=false] - Makes button full width when true
+ * @param {string} [props.className=''] - Additional CSS classes
+ * @param {boolean} [props.disabled] - Disables the button
+ * @returns {JSX.Element} Button component
+ */
 export const Button = ({
   children,
   variant = 'primary',
@@ -44,3 +70,5 @@ export const Button = ({
     </button>
   );
 };
+
+export default Button;

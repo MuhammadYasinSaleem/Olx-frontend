@@ -23,4 +23,4 @@ instructions
 *.njsproj
 *.sln
 *.sw?
-.env
+config.bat

@@ -1,15 +1,39 @@
+/**
+ * @fileoverview Cart item component displaying product details with quantity controls.
+ * @module components/atoms/CartItem
+ */
+
 import { Minus, Package, Plus, X } from 'lucide-react';
 
 import type * as Types from '@types';
 
 import { Button } from './Button';
 
-export interface CartItemProps {
+/**
+ * Props interface for CartItem component.
+ */
+interface CartItemProps {
   item: Types.CartItem;
   onUpdateQuantity: (_id: number, _quantity: number) => void;
   onRemoveItem: (_id: number) => void;
 }
 
+/**
+ * Cart item component for displaying and managing cart products.
+ *
+ * Features:
+ * - Product image display with fallback
+ * - Quantity increment/decrement controls
+ * - Maximum quantity validation
+ * - Remove item functionality
+ * - Responsive layout for mobile and desktop
+ *
+ * @param {Object} props - Component props
+ * @param {Types.CartItem} props.item - Cart item data including product details
+ * @param {Function} props.onUpdateQuantity - Callback when quantity changes
+ * @param {Function} props.onRemoveItem - Callback when item is removed
+ * @returns {JSX.Element} CartItem component
+ */
 export const CartItem = ({
   item,
   onUpdateQuantity,
@@ -118,3 +142,5 @@ export const CartItem = ({
     </div>
   );
 };
+
+export default CartItem;
