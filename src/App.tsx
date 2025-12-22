@@ -3,13 +3,11 @@ import { AppRoutes } from '@routes';
 
 import './App.css';
 
-function App() {
-  return (
-    <>
-      <AppRoutes />
-      <Toaster position="top-center" />
-    </>
-  );
-}
+const App = () => (
+  <>
+    <AppRoutes />
+    <Toaster position="top-center" />
+  </>
+);
 
 export default App;

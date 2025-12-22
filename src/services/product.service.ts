@@ -2,29 +2,29 @@ import type * as Types from '@types';
 
 import { apiClient } from './api.config';
 
-export async function getProducts(): Promise<Types.ProductsResponse> {
+export const getProducts = async (): Promise<Types.ProductsResponse> => {
   const res = await apiClient.get<Types.ProductsApiResponse>('products/');
   return res.data.data.results;
-}
+};
 
-export async function getProductsPaginated(
+export const getProductsPaginated = async (
   page: number = 1,
   pageSize: number = 5,
-): Promise<Types.PaginatedProductsResponse> {
+): Promise<Types.PaginatedProductsResponse> => {
   const res = await apiClient.get<Types.ProductsApiResponse>(
     `products/?page=${page}&page_size=${pageSize}`,
   );
   return res.data.data;
-}
+};
 
-export async function getProductById(id: number): Promise<Types.Product> {
+export const getProductById = async (id: number): Promise<Types.Product> => {
   const res = await apiClient.get<Types.ProductApiResponse>(`products/${id}/`);
   return res.data.data;
-}
+};
 
-export async function createProduct(
+export const createProduct = async (
   productData: Types.ProductRequest,
-): Promise<Types.Product> {
+): Promise<Types.Product> => {
   const formData = new FormData();
 
   formData.append('product_name', productData.product_name);
@@ -52,12 +52,12 @@ export async function createProduct(
   );
 
   return res.data.data;
-}
+};
 
-export async function updateProduct(
+export const updateProduct = async (
   id: number,
   productData: Types.ProductUpdateRequest,
-): Promise<Types.Product> {
+): Promise<Types.Product> => {
   const formData = new FormData();
 
   formData.append('product_name', productData.product_name);
@@ -85,12 +85,12 @@ export async function updateProduct(
   );
 
   return res.data.data;
-}
+};
 
-export async function patchProduct(
+export const patchProduct = async (
   id: number,
   productData: Types.ProductPatchRequest,
-): Promise<Types.Product> {
+): Promise<Types.Product> => {
   const formData = new FormData();
 
   if (productData.product_name) {
@@ -123,4 +123,4 @@ export async function patchProduct(
   );
 
   return res.data.data;
-}
+};
