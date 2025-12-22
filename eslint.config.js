@@ -45,6 +45,7 @@ export default [
       semi: ['error', 'always'],
       quotes: ['error', 'single', { avoidEscape: true }],
       indent: ['error', 2, { SwitchCase: 1 }],
+      'no-inline-comments': 'warn',
       'comma-dangle': ['error', 'always-multiline'],
       'object-curly-spacing': ['error', 'always'],
       'brace-style': ['error', '1tbs', { allowSingleLine: true }],

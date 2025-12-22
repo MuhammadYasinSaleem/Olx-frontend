@@ -33,34 +33,24 @@ export const AuthPage = () => {
   const handleSubmit = async (
     data: Types.UserRequest | { username: string; password: string },
   ) => {
+    const isSignup = authType === 'signup';
+
     try {
-      if (authType === 'signup') {
-        const result = await dispatch(registerUser(data as Types.UserRequest));
-
-        if (registerUser.fulfilled.match(result)) {
-          toast.success('Account created successfully!');
-          setTimeout(() => {
-            navigate('/');
-          }, AUTH_REDIRECT_DELAYS.SIGNUP_SUCCESS);
-        } else if (registerUser.rejected.match(result)) {
-          toast.error(result.payload?.message || 'Registration failed');
-        }
+      if (isSignup) {
+        await dispatch(registerUser(data as Types.UserRequest)).unwrap();
+        toast.success('Account created successfully!');
+        setTimeout(() => navigate('/'), AUTH_REDIRECT_DELAYS.SIGNUP_SUCCESS);
       } else {
-        const result = await dispatch(
+        await dispatch(
           loginUser(data as { username: string; password: string }),
-        );
-
-        if (loginUser.fulfilled.match(result)) {
-          toast.success('Signed in successfully!');
-          setTimeout(() => {
-            navigate('/');
-          }, AUTH_REDIRECT_DELAYS.SIGNIN_SUCCESS);
-        } else if (loginUser.rejected.match(result)) {
-          toast.error(result.payload?.message || 'Sign in failed');
-        }
+        ).unwrap();
+        toast.success('Signed in successfully!');
+        setTimeout(() => navigate('/'), AUTH_REDIRECT_DELAYS.SIGNIN_SUCCESS);
       }
-    } catch (_err) {
-      toast.error('An unexpected error occurred');
+    } catch (error: any) {
+      toast.error(
+        error?.message || (isSignup ? 'Registration failed' : 'Sign in failed'),
+      );
     }
   };
 
