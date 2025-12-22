@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Redux slice for product state management with async thunks.
+ * @module store/productSlice
+ */
+
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import type * as Types from '@types';
@@ -10,6 +15,11 @@ import {
   updateProduct as updateProductService,
 } from '@services';
 
+/**
+ * Async thunk for fetching all products.
+ *
+ * @returns {Promise<Types.ProductsResponse>} Array of products
+ */
 export const fetchProducts = createAsyncThunk<
   Types.ProductsResponse,
   void,
@@ -26,6 +36,12 @@ export const fetchProducts = createAsyncThunk<
   }
 });
 
+/**
+ * Async thunk for fetching paginated products.
+ *
+ * @param {{ page?: number, pageSize?: number }} params - Pagination parameters
+ * @returns {Promise<Types.PaginatedProductsResponse>} Paginated products data
+ */
 export const fetchProductsPaginated = createAsyncThunk<
   Types.PaginatedProductsResponse,
   { page?: number; pageSize?: number },
@@ -45,6 +61,12 @@ export const fetchProductsPaginated = createAsyncThunk<
   },
 );
 
+/**
+ * Async thunk for fetching a single product by ID.
+ *
+ * @param {number} id - Product ID
+ * @returns {Promise<Types.Product>} Product data
+ */
 export const fetchProductById = createAsyncThunk<
   Types.Product,
   number,

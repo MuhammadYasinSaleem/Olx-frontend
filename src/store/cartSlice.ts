@@ -1,13 +1,27 @@
+/**
+ * @fileoverview Redux slice for shopping cart state management.
+ * @module store/cartSlice
+ */
+
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import type * as Types from '@types';
 
+/**
+ * Initial cart state with empty items.
+ */
 const initialState: Types.CartState = {
   items: [],
   totalItems: 0,
   totalPrice: 0,
 };
 
+/**
+ * Calculates cart totals from items array.
+ *
+ * @param {Types.CartItem[]} items - Cart items array
+ * @returns {{ totalItems: number, totalPrice: number }} Calculated totals
+ */
 const calculateTotals = (items: Types.CartItem[]) => {
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
   const totalPrice = items.reduce(
@@ -17,6 +31,17 @@ const calculateTotals = (items: Types.CartItem[]) => {
   return { totalItems, totalPrice };
 };
 
+/**
+ * Cart slice with reducers for cart operations.
+ *
+ * Features:
+ * - Add items to cart with quantity limits
+ * - Remove items from cart
+ * - Update item quantities
+ * - Increment/decrement quantities
+ * - Clear entire cart
+ * - Auto-calculate totals
+ */
 const cartSlice = createSlice({
   name: 'cart',
   initialState,

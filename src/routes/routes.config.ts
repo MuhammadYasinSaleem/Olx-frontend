@@ -1,3 +1,12 @@
+/**
+ * @fileoverview Route configuration constants and types for application navigation.
+ * @module routes/routes.config
+ */
+
+/**
+ * Application route path constants.
+ * Centralized definition of all route paths used throughout the application.
+ */
 export const ROUTES = {
   HOME: '/',
   SIGNIN: '/signin',

@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Custom hook for running validation helpers and reporting errors.
+ * @module hooks/useValidation
+ */
+
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 

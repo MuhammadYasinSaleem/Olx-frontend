@@ -1,9 +1,32 @@
+/**
+ * @fileoverview Axios API client configuration with interceptors and error handling.
+ * @module services/api.config
+ */
+
 import axios, { AxiosError } from 'axios';
 import type { AxiosInstance } from 'axios';
 
+/**
+ * Base URL for API requests from environment variables.
+ */
 const BASE_URL = (import.meta as any).env.VITE_API_BASE_URL;
+
+/**
+ * Request timeout in milliseconds from environment variables.
+ */
 const TIMEOUT = Number((import.meta as any).env.VITE_API_TIMEOUT);
 
+/**
+ * Configured Axios instance for API communication.
+ *
+ * Features:
+ * - Base URL configuration
+ * - CORS credentials support
+ * - JSON content type headers
+ * - Request timeout
+ * - CSRF token handling for Django backend
+ * - Response error interceptor with standardized error format
+ */
 export const apiClient: AxiosInstance = axios.create({
   baseURL: BASE_URL,
   withCredentials: true,

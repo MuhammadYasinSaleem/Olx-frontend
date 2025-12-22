@@ -1,7 +1,15 @@
+/**
+ * @fileoverview Pagination component with page navigation and number display.
+ * @module components/atoms/Pagination
+ */
+
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 import { Button } from './Button';
 
+/**
+ * Props interface for Pagination component.
+ */
 interface PaginationProps {
   currentPage: number;
   totalPages: number;
@@ -12,6 +20,26 @@ interface PaginationProps {
   className?: string;
 }
 
+/**
+ * Pagination component for navigating through paginated data.
+ *
+ * Features:
+ * - Previous/Next navigation buttons
+ * - Page number buttons with smart range display
+ * - Current page indicator
+ * - Loading state support
+ * - Auto-hides when only one page exists
+ *
+ * @param {Object} props - Component props
+ * @param {number} props.currentPage - Currently active page number
+ * @param {number} props.totalPages - Total number of pages
+ * @param {boolean} props.hasNext - Whether next page exists
+ * @param {boolean} props.hasPrevious - Whether previous page exists
+ * @param {Function} props.onPageChange - Callback when page changes
+ * @param {boolean} [props.loading=false] - Disables buttons when loading
+ * @param {string} [props.className=''] - Additional CSS classes
+ * @returns {JSX.Element|null} Pagination component or null if single page
+ */
 export const Pagination = ({
   currentPage,
   totalPages,

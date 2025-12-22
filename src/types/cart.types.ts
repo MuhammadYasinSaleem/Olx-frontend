@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Types for cart items and cart state.
+ * @module types/cart.types
+ */
+
 export type CartItem = {
   id: number;
   product_name: string;

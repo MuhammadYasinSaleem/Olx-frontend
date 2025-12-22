@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Types for products, product requests, and product API responses.
+ * @module types/product.types
+ */
+
 export type Product = {
   id: number;
   product_name: string;

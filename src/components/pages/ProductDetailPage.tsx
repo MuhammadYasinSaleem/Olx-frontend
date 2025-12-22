@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Product detail page displaying full product information.
+ * @module components/pages/ProductDetailPage
+ */
+
 import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -20,6 +25,20 @@ import {
   useAppSelector,
 } from '@store';
 
+/**
+ * Product detail page component for viewing full product information.
+ *
+ * Features:
+ * - Full product details display
+ * - Large product image
+ * - Price and quantity information
+ * - Category and seller information
+ * - Add to cart functionality
+ * - Loading and error state handling
+ * - URL parameter-based product fetching
+ *
+ * @returns {JSX.Element} ProductDetailPage component
+ */
 export const ProductDetailPage = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();

@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Main navigation header component with user authentication controls.
+ * @module components/molecules/Header
+ */
+
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -11,6 +16,20 @@ import {
 
 import { logoutUser, useAppDispatch, useAppSelector } from '@store';
 
+/**
+ * Header component providing main site navigation and user controls.
+ *
+ * Features:
+ * - Site logo and home navigation
+ * - Shopping cart with item count badge
+ * - User authentication status display
+ * - Sign in/out functionality
+ * - My Products quick access
+ * - Profile navigation
+ * - Responsive design for mobile and desktop
+ *
+ * @returns {JSX.Element} Header component
+ */
 export const Header = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();

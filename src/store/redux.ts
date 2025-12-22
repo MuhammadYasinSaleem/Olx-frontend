@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Redux store configuration with persistence for user and cart state.
+ * @module store/redux
+ */
+
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import {
@@ -17,22 +22,42 @@ import orderReducer from './orderSlice';
 import productReducer from './productSlice';
 import userReducer from './userSlice';
 
+/**
+ * Persist configuration for user state.
+ */
 const userPersistConfig = {
   key: 'user',
   version: 1,
   storage,
 };
 
+/**
+ * Persist configuration for cart state.
+ */
 const cartPersistConfig = {
   key: 'cart',
   version: 1,
   storage,
 };
 
+/**
+ * Persisted user reducer with localStorage persistence.
+ */
 const persistedUserReducer = persistReducer(userPersistConfig, userReducer);
 
+/**
+ * Persisted cart reducer with localStorage persistence.
+ */
 const persistedCartReducer = persistReducer(cartPersistConfig, cartReducer);
 
+/**
+ * Configured Redux store with persisted reducers.
+ *
+ * Features:
+ * - User state persistence
+ * - Cart state persistence
+ * - Serializable check middleware configuration for redux-persist
+ */
 export const store = configureStore({
   reducer: {
     user: persistedUserReducer,

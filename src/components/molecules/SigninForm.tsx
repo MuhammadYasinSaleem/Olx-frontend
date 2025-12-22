@@ -1,15 +1,39 @@
+/**
+ * @fileoverview Sign in form component with validation and password visibility toggle.
+ * @module components/molecules/SigninForm
+ */
+
 import { FormEvent, useState } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
 
 import { Button, Input } from '@components/atoms';
 import { isValidForm, validateSigninForm, type ValidationErrors } from '@utils';
 
+/**
+ * Props interface for SigninForm component.
+ */
 interface SigninFormProps {
   onSubmit: (_data: { username: string; password: string }) => void;
   loading?: boolean;
   error?: string | null;
 }
 
+/**
+ * Sign in form component for user authentication.
+ *
+ * Features:
+ * - Username and password input fields
+ * - Password visibility toggle
+ * - Form validation with error messages
+ * - Loading state handling
+ * - Server error display
+ *
+ * @param {Object} props - Component props
+ * @param {Function} props.onSubmit - Callback when form is submitted with valid data
+ * @param {boolean} [props.loading] - Shows loading state on submit button
+ * @param {string|null} [props.error] - Server error message to display
+ * @returns {JSX.Element} SigninForm component
+ */
 export const SigninForm = ({ onSubmit, loading, error }: SigninFormProps) => {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({

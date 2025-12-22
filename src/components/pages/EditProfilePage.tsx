@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Edit profile page for updating user account information.
+ * @module components/pages/EditProfilePage
+ */
+
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
@@ -12,6 +17,19 @@ import {
   useAppSelector,
 } from '@store';
 
+/**
+ * Edit profile page component for updating user information.
+ *
+ * Features:
+ * - Pre-populated form with current user data
+ * - Edit email, name, phone, and address
+ * - Form validation and error handling
+ * - Loading states during profile fetch and update
+ * - Auto-redirect after successful update
+ * - Authentication guard
+ *
+ * @returns {JSX.Element} EditProfilePage component
+ */
 export const EditProfilePage: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
