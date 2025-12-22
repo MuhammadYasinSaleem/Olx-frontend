@@ -1,9 +1,13 @@
+import { Toaster } from 'react-hot-toast';
+import { AppRoutes } from '@routes';
+
 import './App.css';
 
 function App() {
   return (
     <>
-      <div className="text-2xl font-bold text-amber-200">Hello world</div>
+      <AppRoutes />
+      <Toaster position="top-center" />
     </>
   );
 }
