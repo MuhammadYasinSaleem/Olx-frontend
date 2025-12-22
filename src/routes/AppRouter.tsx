@@ -105,3 +105,5 @@ export const AppRoutes: React.FC = () => (
     />
   </Routes>
 );
+
+export default AppRoutes;

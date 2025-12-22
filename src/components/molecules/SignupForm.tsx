@@ -148,3 +148,5 @@ export const SignupForm = ({ onSubmit, loading, error }: SignupFormProps) => {
     </form>
   );
 };
+
+export default SignupForm;

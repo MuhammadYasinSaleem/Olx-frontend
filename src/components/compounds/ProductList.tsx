@@ -42,3 +42,5 @@ export const ProductList = ({ products, loading, error }: ProductListProps) => {
     </div>
   );
 };
+
+export default ProductList;

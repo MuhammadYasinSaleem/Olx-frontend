@@ -104,3 +104,5 @@ export const ProductCard = ({ product }: ProductCardProps) => {
     </div>
   );
 };
+
+export default ProductCard;

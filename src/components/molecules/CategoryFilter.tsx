@@ -161,3 +161,5 @@ export const CategoryFilter = ({ className = '' }: CategoryFilterProps) => {
     </div>
   );
 };
+
+export default CategoryFilter;

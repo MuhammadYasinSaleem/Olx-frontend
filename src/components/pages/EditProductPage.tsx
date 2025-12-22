@@ -400,3 +400,5 @@ export const EditProductPage: React.FC = () => {
     </div>
   );
 };
+
+export default EditProductPage;

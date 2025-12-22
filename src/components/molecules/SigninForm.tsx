@@ -86,3 +86,5 @@ export const SigninForm = ({ onSubmit, loading, error }: SigninFormProps) => {
     </form>
   );
 };
+
+export default SigninForm;

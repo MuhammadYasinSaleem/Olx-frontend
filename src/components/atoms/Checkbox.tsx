@@ -26,3 +26,5 @@ export const Checkbox = ({
     )}
   </label>
 );
+
+export default Checkbox;

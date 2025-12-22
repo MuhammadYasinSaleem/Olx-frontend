@@ -202,3 +202,5 @@ export const MyProductsPage = () => {
     </div>
   );
 };
+
+export default MyProductsPage;

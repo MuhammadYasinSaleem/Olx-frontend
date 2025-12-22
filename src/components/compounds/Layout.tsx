@@ -11,3 +11,5 @@ export const Layout: React.FC = () => (
     </main>
   </div>
 );
+
+export default Layout;
